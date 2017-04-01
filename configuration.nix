@@ -6,6 +6,8 @@
       ./hardware-configuration.nix
     ];
 
+  system.stateVersion = "16.09";
+
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "zero";
@@ -30,24 +32,23 @@
   ];
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   services.xserver = {
-    displayManager.sddm.enable = true;
-    displayManager.sddm.autoLogin.user = "john";
-
-    desktopManager.kde5.enable = true;
-
-    videoDrivers = [ "nvidia" ];
-
     enable = true;
     layout = "us";
-   };
+    videoDrivers = [ "nvidia" ];
+
+    displayManager.sddm = {
+      enable = true;
+      autoLogin.enable = true;
+      autoLogin.user = "john";
+    };
+    desktopManager.kde5.enable = true;
+  };
 
   programs.zsh.enable = true;;
-  environment.shells = pkgs zsh;
+  environment.shells = pkgs.zsh;
 
    users = {
       defaultUserShell = pkgs.sh;
@@ -67,19 +68,19 @@
     sudo.enable = true;
   };
 
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot";
-    systemd-boot.enable = true;
-  };
+  boot.
 
   # Bootloader settings
-  boot.zfs.forceImportAll = false;
-  boot.zfs.forceImportRoot = false;
-  boot.initrd.supportedFilesystems = [ "zfs" ];
-  boot.supportedFilesystems = [ "zfs" ];
+  boot = {
+    loader = {
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/boot";
+      systemd-boot.enable = true;
+    };
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.09";
-
-}
+    zfs.forceImportAll = false;
+    zfs.forceImportRoot = false;
+    initrd.supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = [ "zfs" ];
+  };
+};
