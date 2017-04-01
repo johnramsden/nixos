@@ -11,6 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "zero";
+    # networking.hostid = "14ac0214";
   networking.hostId = "9abd29be";
 
   # Select internationalisation properties.
