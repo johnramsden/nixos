@@ -3,12 +3,15 @@
 {
   ## Bootloader ##
   boot = {
+    tmpOnTmpfs = true;
+    cleanTmpDir = true;
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
       systemd-boot.enable = true;
     };
 
+    # Do not forcefully importpool or root.
     zfs.forceImportAll = false;
     zfs.forceImportRoot = false;
     initrd.supportedFilesystems = [ "zfs" ];

@@ -3,12 +3,12 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./networking.nix
-      ./software.nix
-      ./services.nix
-      ./users.nix
-      ./boot.nix
+      ./configuration/hardware-configuration.nix
+      ./configuration/networking.nix
+      ./configuration/software.nix
+      ./configuration/services.nix
+      ./configuration/users.nix
+      ./configuration/boot.nix
     ];
 
   system.autoUpgrade.enable = true;
