@@ -14,4 +14,7 @@
     initrd.supportedFilesystems = [ "zfs" ];
     supportedFilesystems = [ "zfs" ];
   };
+
+  fileSystems."/nix".neededForBoot = true;
+  fileSystems."/nix/store".neededForBoot = true;
 }

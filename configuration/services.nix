@@ -9,7 +9,7 @@
       enable = true;
       autoLogin.user = "john";
     };
-    desktopManager.kde5.enable = true;
+    desktopManager.plasma5 = true;
 
     videoDrivers = [ "nvidia" ];
 

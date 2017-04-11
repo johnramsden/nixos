@@ -2,7 +2,7 @@
 
 {
   networking = {
-    hostName = "zero";
+    hostName = "atom";
     hostId = "14ac0214";
   };
 
