@@ -12,12 +12,9 @@
     
     domain = "ramsden.network";
 
-    interfaces = {
-      eno1 = {
-        ip4 = [ { address = "172.20.20.2"; prefixLength = 24; } ];
-      };
-    };
+    interfaces.eno1.ip4 = [ { address = "172.20.20.2"; prefixLength = 24; } ];
 
+    nameservers = [ "172.20.20.1" "8.8.8.8" ];
   };
 
   time.timeZone = "Canada/Pacific";
