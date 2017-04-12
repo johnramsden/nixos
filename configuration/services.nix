@@ -35,16 +35,5 @@
       autoSnapshot.frequent = 30;
       autoSnapshot.hourly = 100;
     };
-
-    autofs = {
-      enable = true;
-      autoMaster let
-        mapConf = pkgs.writeText "auto" ''
-          /net      -hosts      --timeout=60
-        '';
-      in ''
-        /auto file:${mapConf}
-      ''
-    };
   };
 }

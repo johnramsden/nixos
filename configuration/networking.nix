@@ -22,15 +22,18 @@
 
   ## Network Services ##
   services = {
+    rpcbind.enable = true;
+
     autofs = {
       enable = true;
-      autoMaster let
+
+      autoMaster = let
         mapConf = pkgs.writeText "auto" ''
           /net      -hosts      --timeout=60
         '';
       in ''
         /auto file:${mapConf}
-      ''
+      '';
     };
   };
 }
