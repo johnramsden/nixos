@@ -16,7 +16,7 @@
             [X11]
             # Arguments passed to the X server invocation
             ServerArguments=-nolisten tcp -dpi 192
-          ''
+          '';
       };
     desktopManager.plasma5.enable = true;
 
