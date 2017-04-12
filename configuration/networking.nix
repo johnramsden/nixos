@@ -7,10 +7,10 @@
 
     defaultGateway = {
       address = "172.20.20.1";
-      interface = "eno1"
+      interface = "eno1";
     };
     
-    domain = ramsden.network;
+    domain = "ramsden.network";
 
     interfaces = {
       eno1 = {

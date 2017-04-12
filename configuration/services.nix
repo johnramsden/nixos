@@ -9,7 +9,7 @@
       enable = true;
       autoLogin.user = "john";
     };
-    desktopManager.plasma5 = true;
+    desktopManager.plasma5.enable = true;
 
     videoDrivers = [ "nvidia" ];
 
