@@ -5,7 +5,9 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     pulseaudio.enable = true;
-#    pulseaudio.systemWide = true;
+    
+    # acceleration for 32-bit programs
+    opengl.driSupport32Bit = true;
   };
 
 }

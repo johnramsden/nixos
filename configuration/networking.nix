@@ -24,17 +24,10 @@
   services = {
     rpcbind.enable = true;
 
-#    autofs = {
-#      enable = true;
-#
-#      autoMaster = let
-#        mapConf = pkgs.writeText "auto" ''
-#          /net      -hosts      --timeout=60
-#        '';
-#      in ''
-#        /auto file:${mapConf}
-#      '';
-#    };
+    autofs = {
+      enable = true;
+      autoMaster = ''/net      -hosts      --timeout=60'';
+    };
 
   };
 }
