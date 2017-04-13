@@ -14,6 +14,11 @@
 
   system.autoUpgrade.enable = true;
 
+  nix.gc = { # Run Garbage Collecter nightly
+    automatic = true;
+    dates = "20:15";
+  };
+
   # Select internationalisation properties.
   i18n = {
      consoleFont = "Lat2-Terminus16";
