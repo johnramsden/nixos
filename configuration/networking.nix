@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  ## Main Network Configuration ##
   networking = {
     hostName = "atom";
     hostId = "14ac0214";
@@ -9,7 +10,7 @@
       address = "172.20.20.1";
       interface = "eno1";
     };
-    
+
     domain = "ramsden.network";
 
     interfaces.eno1.ip4 = [ { address = "172.20.20.2"; prefixLength = 24; } ];
@@ -18,4 +19,15 @@
   };
 
   time.timeZone = "Canada/Pacific";
+
+  ## Network Services ##
+  services = {
+    rpcbind.enable = true;
+
+    autofs = {
+      enable = true;
+      autoMaster = ''/net      -hosts      --timeout=60'';
+    };
+
+  };
 }

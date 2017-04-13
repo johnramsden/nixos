@@ -7,7 +7,7 @@
   users.extraUsers.john = {
         name = "john";
         group = "users";
-        extraGroups = [ "wheel" "networkmanager" ];
+        extraGroups = [ "wheel" "networkmanager" "audio" ];
         uid = 1000;
         home = "/home/john";
         shell = pkgs.zsh;

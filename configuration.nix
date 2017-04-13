@@ -4,6 +4,7 @@
   imports =
     [
       ./configuration/hardware-configuration.nix
+      ./configuration/hardware.nix
       ./configuration/networking.nix
       ./configuration/software.nix
       ./configuration/services.nix
@@ -12,6 +13,11 @@
     ];
 
   system.autoUpgrade.enable = true;
+
+  nix.gc = { # Run Garbage Collecter nightly
+    automatic = true;
+    dates = "20:15";
+  };
 
   # Select internationalisation properties.
   i18n = {
