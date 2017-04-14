@@ -27,31 +27,6 @@
       fsType = "zfs";
     };
 
-  fileSystems."/nix/.rw-store" =
-    { device = "vault/sys/atom/ROOT/default/nix/rw-store";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix/.ro-store" =
-    { device = "vault/sys/atom/ROOT/default/nix/ro-store";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix/var" =
-    { device = "vault/sys/atom/ROOT/default/nix/var";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix/var/nix" =
-    { device = "vault/sys/atom/ROOT/default/nix/var/nix";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix/var/log" =
-    { device = "vault/sys/atom/ROOT/default/nix/var/log";
-      fsType = "zfs";
-    };
-
   fileSystems."/var" =
     { device = "vault/sys/atom/ROOT/default/var";
       fsType = "zfs";
@@ -62,13 +37,13 @@
       fsType = "zfs";
     };
 
-  fileSystems."/var/cache" =
-    { device = "vault/sys/atom/var/cache";
+  fileSystems."/var/log" =
+    { device = "vault/sys/atom/var/log";
       fsType = "zfs";
     };
 
-  fileSystems."/var/log" =
-    { device = "vault/sys/atom/var/log";
+  fileSystems."/nix/.ro-store" =
+    { device = "vault/sys/atom/ROOT/default/nix/ro-store";
       fsType = "zfs";
     };
 
@@ -77,8 +52,8 @@
       fsType = "zfs";
     };
 
-  fileSystems."/var/lib/nixos" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/nixos";
+  fileSystems."/var/cache" =
+    { device = "vault/sys/atom/var/cache";
       fsType = "zfs";
     };
 
@@ -87,13 +62,13 @@
       fsType = "zfs";
     };
 
-  fileSystems."/var/lib/containers" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/containers";
+  fileSystems."/nix/var" =
+    { device = "vault/sys/atom/ROOT/default/nix/var";
       fsType = "zfs";
     };
 
-  fileSystems."/var/lib/systemd/coredump" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/systemd/coredump";
+  fileSystems."/var/lib/nixos" =
+    { device = "vault/sys/atom/ROOT/default/var/lib/nixos";
       fsType = "zfs";
     };
 
@@ -102,8 +77,33 @@
       fsType = "zfs";
     };
 
+  fileSystems."/var/lib/containers" =
+    { device = "vault/sys/atom/ROOT/default/var/lib/containers";
+      fsType = "zfs";
+    };
+
+  fileSystems."/nix/.rw-store" =
+    { device = "vault/sys/atom/ROOT/default/nix/rw-store";
+      fsType = "zfs";
+    };
+
   fileSystems."/home/john" =
     { device = "vault/sys/atom/home/john";
+      fsType = "zfs";
+    };
+
+  fileSystems."/var/lib/systemd/coredump" =
+    { device = "vault/sys/atom/ROOT/default/var/lib/systemd/coredump";
+      fsType = "zfs";
+    };
+
+  fileSystems."/nix/var/log" =
+    { device = "vault/sys/atom/ROOT/default/nix/var/log";
+      fsType = "zfs";
+    };
+
+  fileSystems."/nix/var/nix" =
+    { device = "vault/sys/atom/ROOT/default/nix/var/nix";
       fsType = "zfs";
     };
 
@@ -112,13 +112,13 @@
       fsType = "zfs";
     };
 
-  fileSystems."/home/john/.config" =
-    { device = "vault/sys/atom/home/john/config";
+  fileSystems."/home/john/.local" =
+    { device = "vault/sys/atom/home/john/local";
       fsType = "zfs";
     };
 
-  fileSystems."/home/john/.local" =
-    { device = "vault/sys/atom/home/john/local";
+  fileSystems."/home/john/.config" =
+    { device = "vault/sys/atom/home/john/config";
       fsType = "zfs";
     };
 
@@ -127,9 +127,93 @@
       fsType = "vfat";
     };
 
+  fileSystems."/tmp" =
+    { device = "tmpfs";
+      fsType = "tmpfs";
+    };
+
+  fileSystems."/mnt/lilan/Data" =
+    { device = "lilan.ramsden.network:/mnt/tank/data/Atreides";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Torrents" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Torrents";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Downloads/Complete" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Complete";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Downloads/Incomplete" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Incomplete";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Series" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Series";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Anime" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Anime";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Documentary" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Documentary";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Lectures" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Lectures";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Animated" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Animated";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Podcasts/Video" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Video";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Podcasts/Audio" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Audio";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Movies" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Movies";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
+  fileSystems."/mnt/lilan/media/Music" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Music";
+      fsType = "nfs4";
+      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/de6bf709-e584-453f-a385-861af726c5bd"; }
     ];
 
   nix.maxJobs = lib.mkDefault 8;
+  powerManagement.cpuFreqGovernor = "powersave";
 }
