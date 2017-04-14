@@ -107,17 +107,17 @@
       fsType = "zfs";
     };
 
-  fileSystems."/home/john/cache" =
+  fileSystems."/home/john/.cache" =
     { device = "vault/sys/atom/home/john/cache";
       fsType = "zfs";
     };
 
-  fileSystems."/home/john/config" =
+  fileSystems."/home/john/.config" =
     { device = "vault/sys/atom/home/john/config";
       fsType = "zfs";
     };
 
-  fileSystems."/home/john/local" =
+  fileSystems."/home/john/.local" =
     { device = "vault/sys/atom/home/john/local";
       fsType = "zfs";
     };
