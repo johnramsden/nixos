@@ -10,6 +10,7 @@
       ./configuration/services.nix
       ./configuration/users.nix
       ./configuration/boot.nix
+      ./configuration/oh-my-zsh
     ];
 
   system.autoUpgrade.enable = true;

@@ -132,10 +132,69 @@
       fsType = "tmpfs";
     };
 
-  fileSystems."/home/john/.cache/google-chrome" =
-    { device = "tmpfs";
-      fsType = "tmpfs";
-      options = [ "uid=1000" "gid=100"];
+  fileSystems."/mnt/lilan/Data" =
+    { device = "lilan.ramsden.network:/mnt/tank/data/Atreides";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Torrents" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Torrents";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Downloads/Complete" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Complete";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Downloading/Downloads/Incomplete" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Incomplete";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Anime" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Anime";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Documentary" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Documentary";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Lectures" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Lectures";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Animated" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Animated";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Podcasts/Video" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Video";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Podcasts/Audio" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Audio";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Movies" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Movies";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Music" =
+    { device = "lilan.ramsden.network:/mnt/tank/media/Music";
+      fsType = "nfs4";
+    };
+
+  fileSystems."/mnt/lilan/media/Series/Series" =
+    { device = "systemd-1";
+      fsType = "autofs";
     };
 
   fileSystems."/home/john/University" =
@@ -171,84 +230,6 @@
   fileSystems."/home/john/Workspace" =
     { device = "vault/data/Workspace";
       fsType = "zfs";
-    };
-
-  fileSystems."/mnt/lilan/Data" =
-    { device = "lilan.ramsden.network:/mnt/tank/data/Atreides";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Downloading/Torrents" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Torrents";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Downloading/Downloads/Complete" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Complete";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Downloading/Downloads/Incomplete" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Downloads/Incomplete";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Series" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Series";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Anime" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Anime";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Documentary" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Documentary";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Lectures" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Lectures";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Animated" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Animated";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Podcasts/Video" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Video";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Series/Podcasts/Audio" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Series/Podcasts/Audio";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Movies" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Movies";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
-    };
-
-  fileSystems."/mnt/lilan/media/Music" =
-    { device = "lilan.ramsden.network:/mnt/tank/media/Music";
-      fsType = "nfs";
-      options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
     };
 
   swapDevices =
