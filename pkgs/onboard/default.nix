@@ -1,3 +1,5 @@
+with import <nixpkgs> {};
+
 stdenv.mkDerivation rec {
   name = "onboard-${version}";
   version = "1.4.1";
@@ -23,6 +25,13 @@ stdenv.mkDerivation rec {
     python3 "./setup.py" build
   '';
   installPhase = ''
-    python3 "./setup.py" install
+    python3 "./setup.py" install --prefix=$out
   '';
+
+  meta = with stdenv.lib; {
+    homepage = https://launchpad.net/onboard;
+    description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
+    license = licenses.gpl3;
+    platforms = platforms.linux;
+  };
 }

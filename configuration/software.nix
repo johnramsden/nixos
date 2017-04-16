@@ -50,7 +50,8 @@
       kdeApplications.okteta
       kdeApplications.okular
       kdeApplications.print-manager
-      kdeApplications.spectacle  ];
+      kdeApplications.spectacle  ] ++
+      [ (import ./pkgs/onboard/default.nix ) ];
 
   programs.zsh.enable = true;
 
