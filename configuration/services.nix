@@ -32,8 +32,6 @@
       autoScrub.enable = true;
       autoScrub.interval = "monthly";
       autoSnapshot.enable = true;
-      autoSnapshot.frequent = 30;
-      autoSnapshot.hourly = 100;
     };
   };
 }
