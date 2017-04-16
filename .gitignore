@@ -1,0 +1,5 @@
+ssh/*
+!ssh/config
+linphonerc.tmp
+private-keys*
+.directory
