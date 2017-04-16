@@ -16,7 +16,7 @@
     # Shell and related
     [ oh-my-zsh ] ++
     # Userspace utilities
-    [  pavucontrol ] ++
+    [  pavucontrol conky ] ++
     # General user applications
     [ atom yakuake google-chrome xvkbd jitsi hexchat deluge ] ++
     # Programming

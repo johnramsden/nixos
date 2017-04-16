@@ -7,9 +7,9 @@
     # Path to your oh-my-zsh installation.
     ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
     # History file
-    HISTFILE=$HOME/Computer/Linux/Profiles/oh-my-zsh/$COMPUTER/zsh_history
+    HISTFILE=$HOME/Computer/Profiles/oh-my-zsh/zsh_history
     # Change custom directory
-    ZSH_CUSTOM=$HOME/Computer/Linux/Profiles/oh-my-zsh/$COMPUTER/custom
+    ZSH_CUSTOM=$HOME/Computer/Profiles/oh-my-zsh/custom
     # Theme
     ZSH_THEME="af-magic"
     # Dont auto update
