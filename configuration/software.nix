@@ -7,7 +7,7 @@
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
     # System Administration
-    [ wget curl git ] ++
+    [ wget curl git unzip ] ++
     # Networking
     [ nfs-utils libnfsidmap ] ++
     # Nix Specific
@@ -18,7 +18,7 @@
     # Userspace utilities
     [  pavucontrol ] ++
     # General user applications
-    [ atom yakuake google-chrome xvkbd jitsi hexchat ] ++
+    [ atom yakuake google-chrome xvkbd jitsi hexchat deluge ] ++
     # Programming
     [ gitkraken idea.clion ] ++
     ## KDE ##
