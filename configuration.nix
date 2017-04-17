@@ -11,7 +11,8 @@
       ./configuration/users.nix
       ./configuration/boot.nix
       ./configuration/oh-my-zsh
-      ./pkgs/onboard
+
+      ./users
     ];
 
   system.autoUpgrade.enable = true;

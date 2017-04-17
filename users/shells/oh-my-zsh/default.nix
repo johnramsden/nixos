@@ -19,6 +19,7 @@
     export XDG_CONFIG_HOME=$HOME/.config
     export ELECTRON_TRASH=kioclient5
     export EDITOR="nano"
+    export XENVIRONMENT=$HOME/.Xdefaults
   '';
 
   programs.zsh.promptInit = "";
