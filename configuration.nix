@@ -8,9 +8,7 @@
       ./configuration/networking.nix
       ./configuration/software.nix
       ./configuration/services.nix
-      ./configuration/users.nix
       ./configuration/boot.nix
-      ./configuration/oh-my-zsh
 
       ./users
     ];
