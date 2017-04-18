@@ -16,7 +16,7 @@
   ## Network Services ##
   services = {
     rpcbind.enable = true;
-
+    znapzend.enable = true;
   };
 
   ## Network Mounts ##

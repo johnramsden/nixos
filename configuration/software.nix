@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+
   ## Packages ##
   nixpkgs.config.allowUnfree = true;
 
@@ -18,7 +19,7 @@
     # Userspace utilities
     [  pavucontrol conky ] ++
     # General user applications
-    [ atom yakuake google-chrome xvkbd jitsi hexchat deluge ] ++
+    [ atom yakuake google-chrome xvkbd hexchat deluge libreoffice blink ] ++
     # Programming
     [ gitkraken idea.clion ] ++
     ## KDE ##
@@ -52,6 +53,8 @@
       kdeApplications.print-manager
       kdeApplications.spectacle  ];
 
+
   programs.zsh.enable = true;
+
 
 }
