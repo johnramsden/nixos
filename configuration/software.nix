@@ -17,7 +17,9 @@
     # Shell and related
     [ oh-my-zsh ] ++
     # Userspace utilities
-    [  pavucontrol conky ] ++
+    [  pavucontrol ] ++
+    # Conky & conky requirements
+    [ conky imlib2 perlPackages.MailIMAPClient ] ++
     # General user applications
     [ atom yakuake google-chrome xvkbd hexchat deluge libreoffice blink ] ++
     # Programming
