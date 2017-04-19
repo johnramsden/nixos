@@ -2,7 +2,7 @@
 
 {
   ##  ZSH Configuration  ##
-  programs.zsh.interactiveShellInit = ''
+  environment.interactiveShellInit = ''
     COMPUTER="atom";
     ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/                    # OMZ install
     HISTFILE=$HOME/Computer/Profiles/oh-my-zsh/zsh_history
