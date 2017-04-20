@@ -10,51 +10,6 @@
 
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
-  let c-onboard = with pkgs; python35Packages.buildPythonApplication rec {
-    name = "onboard-${version}";
-    majorVersion = "1.4";
-    version = "${majorVersion}.1";
-    src = fetchurl {
-      url = "https://launchpad.net/onboard/${majorVersion}/${version}/+download/${name}.tar.gz";
-      sha256 = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865";
-    };
-
-    doCheck = false;
-
-  propagatedBuildInputs = [ gtk3
-                   python3
-                   hunspell
-                   isocodes
-                   libcanberra_gtk3
-                   xorg.libxkbfile
-                   libxkbcommon
-                   python35Packages.pycairo
-                   python35Packages.dbus-python
-                   python35Packages.pygobject3
-                   python35Packages.systemd
-                   libudev
-                   python35Packages.distutils_extra
-                   gnome3.dconf
-                   pkgconfig
-                   xorg.libXtst
-                   bash ];
-
-    preBuild = ''
-      sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
-      for file in Onboard/pypredict/attic/*; do
-        echo "Copying $file to $file.py"
-        cp $file $file.py;
-      done
-    '';
-
-    meta = {
-      homepage = https://launchpad.net/onboard;
-      description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
-      license = stdenv.lib.licenses.gpl3;
-    };
-  };
-
-  in [ c-onboard ] ++
     # System Administration
     [ wget curl git unzip yakuake ] ++
     # Networking
@@ -101,45 +56,7 @@
       kdeApplications.okteta
       kdeApplications.okular
       kdeApplications.print-manager
-      kdeApplications.spectacle  ] ++
-      # Add polkit action
-      [ (pkgs.writeTextFile {
-            name = "org.john.zfs.policy";
-            destination = "/share/polkit-1/actions/org.john.zfs.policy";
-            text = ''
-            <?xml version="1.0" encoding="UTF-8"?>
-            <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD polkit Policy Configuration 1.0//EN"
-            "http://www.freedesktop.org/software/polkit/policyconfig-1.dtd">
-            <policyconfig>
-
-              <vendor>John Ramsden</vendor>
-              <vendor_url>https://ramsdenj.com/</vendor_url>
-
-              <action id="org.john.zfs">
-                <description>Run zfs list</description>
-                <message>Authentication is required to run zfs list as (user=$(user), user.gecos=$(user.gecos), user.display=$(user.display)$
-                <defaults>
-                  <allow_any>yes</allow_any>
-                  <allow_inactive>yes</allow_inactive>
-                  <allow_active>yes</allow_active>
-                </defaults>
-                <annotate key="org.freedesktop.policykit.exec.path">${pkgs.zfs}/sbin/zfs</annotate>
-              </action>
-
-              <action id="org.john.zpool">
-                <description>Run zpool status</description>
-                <message>Authentication is required to run zpool status as (user=$(user), user.gecos=$(user.gecos), user.display=$(user.disp$
-                <defaults>
-                  <allow_any>yes</allow_any>
-                  <allow_inactive>yes</allow_inactive>
-                  <allow_active>yes</allow_active>
-                </defaults>
-                <annotate key="org.freedesktop.policykit.exec.path">${pkgs.zfs}/sbin/zpool</annotate>
-              </action>
-
-            </policyconfig>
-            '';   } )
-      ];
+      kdeApplications.spectacle  ];
 
 
   programs.zsh.enable = true;
