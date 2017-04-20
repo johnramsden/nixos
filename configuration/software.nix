@@ -5,14 +5,58 @@
   ## Packages ##
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-         "libplist-1.12"
-       ];
+  # Required for thunderbird branding
+  nixpkgs.config.permittedInsecurePackages = [ "libplist-1.12" ];
 
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
+  let c-onboard = with pkgs; python35Packages.buildPythonApplication rec {
+    name = "onboard-${version}";
+    majorVersion = "1.4";
+    version = "${majorVersion}.1";
+    src = fetchurl {
+      url = "https://launchpad.net/onboard/${majorVersion}/${version}/+download/${name}.tar.gz";
+      sha256 = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865";
+    };
+
+    doCheck = false;
+
+  propagatedBuildInputs = [ gtk3
+                   python3
+                   hunspell
+                   isocodes
+                   libcanberra_gtk3
+                   xorg.libxkbfile
+                   libxkbcommon
+                   python35Packages.pycairo
+                   python35Packages.dbus-python
+                   python35Packages.pygobject3
+                   python35Packages.systemd
+                   libudev
+                   python35Packages.distutils_extra
+                   gnome3.dconf
+                   pkgconfig
+                   xorg.libXtst
+                   bash ];
+
+    preBuild = ''
+      sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
+      for file in Onboard/pypredict/attic/*; do
+        echo "Copying $file to $file.py"
+        cp $file $file.py;
+      done
+    '';
+
+    meta = {
+      homepage = https://launchpad.net/onboard;
+      description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
+      license = stdenv.lib.licenses.gpl3;
+    };
+  };
+
+  in [ c-onboard ] ++
     # System Administration
-    [ wget curl git unzip ] ++
+    [ wget curl git unzip yakuake ] ++
     # Networking
     [ nfs-utils libnfsidmap ] ++
     # Nix Specific
@@ -21,13 +65,13 @@
     # Shell and related
     [ oh-my-zsh ] ++
     # Userspace utilities
-    [  pavucontrol ] ++
-    # Conky & conky requirements
-    [ conky imlib2 perlPackages.MailIMAPClient ] ++
+    [ conky pavucontrol ] ++
     # General user applications
-    [ atom yakuake google-chrome gimp thunderbird xvkbd hexchat deluge libreoffice blink clementine ] ++
+    [ gimp xvkbd deluge libreoffice clementine ] ++
+    # Internet
+    [ blink hexchat google-chrome thunderbird ] ++
     # Programming
-    [ gitkraken idea.clion ] ++
+    [ gitkraken idea.clion atom ] ++
     ## KDE ##
     [ kdeApplications.akonadi-contacts
       kdeApplications.akonadi-mime
