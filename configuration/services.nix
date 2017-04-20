@@ -40,17 +40,17 @@
         # Change editor
       Defaults editor=${pkgs.nano}/bin/nano
 
-      # Allow running zfs list and zpool list passwordless
-      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zfs list
-      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool list
-      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool status
-
       # Dont log sudo for ZFS commands
       Cmnd_Alias ZFS = ${pkgs.zfs}/sbin/zfs, ${pkgs.zfs}/sbin/zpool
       Defaults!ZFS !syslog
 
       # Time before retyping password
       Defaults        env_reset,timestamp_timeout=300
+
+      # Allow running zfs list and zpool list passwordless
+      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list
+      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zpool list
+      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zpool status
     '';
 
     polkit = {
