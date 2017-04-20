@@ -45,29 +45,10 @@
       Defaults!ZFS !syslog
 
       # Time before retyping password
-      Defaults        env_reset,timestamp_timeout=300
+      Defaults        env_reset,timestamp_timeout=0
 
       # Allow running zfs list and zpool list passwordless
-      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list
-      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zpool list
-      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zpool status
+      john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list*, ${pkgs.zfs}/sbin/zpool list*, ${pkgs.zfs}/sbin/zpool status*
     '';
-
-    polkit = {
-      enable = true;
-      extraConfig = ''
-      /* Allow members of the wheel group to execute the defined actions
-      * without password authentication, similar to "sudo NOPASSWD:"
-      */
-      polkit.addRule(function(action, subject) {
-        if ((action.id == "org.john.zfs" ||
-             action.id == "org.john.zpool") &&
-            subject.isInGroup("wheel"))
-        {
-            return polkit.Result.YES;
-        }
-      });
-      '';
-    };
   };
 }
