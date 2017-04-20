@@ -5,6 +5,10 @@
   ## Packages ##
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+         "libplist-1.12"
+       ];
+
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
     # System Administration
@@ -21,7 +25,7 @@
     # Conky & conky requirements
     [ conky imlib2 perlPackages.MailIMAPClient ] ++
     # General user applications
-    [ atom yakuake google-chrome gimp thunderbird xvkbd hexchat deluge libreoffice blink ] ++
+    [ atom yakuake google-chrome gimp thunderbird xvkbd hexchat deluge libreoffice blink clementine ] ++
     # Programming
     [ gitkraken idea.clion ] ++
     ## KDE ##
