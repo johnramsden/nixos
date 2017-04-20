@@ -21,7 +21,7 @@
     # Conky & conky requirements
     [ conky imlib2 perlPackages.MailIMAPClient ] ++
     # General user applications
-    [ atom yakuake google-chrome xvkbd hexchat deluge libreoffice blink ] ++
+    [ atom yakuake google-chrome gimp thunderbird xvkbd hexchat deluge libreoffice blink ] ++
     # Programming
     [ gitkraken idea.clion ] ++
     ## KDE ##
