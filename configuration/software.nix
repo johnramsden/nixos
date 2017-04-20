@@ -12,20 +12,17 @@
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
     # System Administration
-    [ wget curl git unzip yakuake ] ++
+    [ oh-my-zsh wget curl git unzip yakuake nix-repl ] ++
     # Networking
     [ nfs-utils libnfsidmap ] ++
-    # Nix Specific
-    [ nix-repl ] ++
-    ## USER - 'john' ##
-    # Shell and related
-    [ oh-my-zsh ] ++
-    # Userspace utilities
-    [ conky pavucontrol ] ++
-    # General user applications
-    [ gimp xvkbd deluge libreoffice clementine ] ++
+    # utilities
+    [ conky pavucontrol xvkbd ] ++
+    #Office
+    [ gimp libreoffice ] ++
+    # Multimedia
+    [ clementine ] ++
     # Internet
-    [ blink hexchat google-chrome thunderbird ] ++
+    [ blink hexchat google-chrome thunderbird deluge ] ++
     # Programming
     [ gitkraken idea.clion atom ] ++
     ## KDE ##
@@ -62,7 +59,7 @@
 
   programs.zsh.enable = true;
 
-  /*let c-onboard = with pkgs; python35Packages.buildPythonApplication rec {
+  /*let packaged-onboard = with pkgs; python35Packages.buildPythonApplication rec {
     name = "onboard-${version}";
     majorVersion = "1.4";
     version = "${majorVersion}.1";
@@ -105,5 +102,5 @@
       license = stdenv.lib.licenses.gpl3;
     };
   };
-  in [ c-onboard ];*/
+  in [ packaged-onboard ];*/
 }
