@@ -35,20 +35,39 @@
     };
   };
 
-  security.sudo.extraConfig = ''
-      # Change editor
-    Defaults editor=${pkgs.nano}/bin/nano
+  security = {
+    sudo.extraConfig = ''
+        # Change editor
+      Defaults editor=${pkgs.nano}/bin/nano
 
-    # Allow running zfs list and zpool list passwordless
-    john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zfs list
-    john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool list
-    john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool status
+      # Allow running zfs list and zpool list passwordless
+      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zfs list
+      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool list
+      john ALL=(ALL) NOPASSWD: ${pkgs.zfs}/sbin/zpool status
 
-    # Dont log sudo for ZFS commands
-    Cmnd_Alias ZFS = ${pkgs.zfs}/sbin/zfs, ${pkgs.zfs}/sbin/zpool
-    Defaults!ZFS !syslog
+      # Dont log sudo for ZFS commands
+      Cmnd_Alias ZFS = ${pkgs.zfs}/sbin/zfs, ${pkgs.zfs}/sbin/zpool
+      Defaults!ZFS !syslog
 
-    # Time before retyping password
-    Defaults        env_reset,timestamp_timeout=300
-  '';
+      # Time before retyping password
+      Defaults        env_reset,timestamp_timeout=300
+    '';
+
+    polkit = {
+      enable = true;
+      extraConfig = ''
+      /* Allow members of the wheel group to execute the defined actions
+      * without password authentication, similar to "sudo NOPASSWD:"
+      */
+      polkit.addRule(function(action, subject) {
+        if ((action.id == "org.john.zfs" ||
+             action.id == "org.john.zpool") &&
+            subject.isInGroup("wheel"))
+        {
+            return polkit.Result.YES;
+        }
+      });
+      '';
+    };
+  };
 }
