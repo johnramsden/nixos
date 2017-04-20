@@ -45,7 +45,7 @@
       Defaults!ZFS !syslog
 
       # Time before retyping password
-      Defaults        env_reset,timestamp_timeout=0
+      Defaults        env_reset,timestamp_timeout=1500
 
       # Allow running zfs list and zpool list passwordless
       john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list*, ${pkgs.zfs}/sbin/zpool list*, ${pkgs.zfs}/sbin/zpool status*
