@@ -38,7 +38,7 @@
         xorg.libXScrnSaver
       ];
 
-      phases = [ "unpackPhase" ];
+      phases = [ "unpackPhase" "fixupPhase"  ];
 
       unpackPhase = ''
         source $stdenv/setup # Not sure if neccesary
@@ -47,15 +47,29 @@
         ${dpkg}/bin/dpkg-deb -x $src unpacked
         cp -r unpacked/* $out/
       '';
+
+      fixupPhase = ''
+        # Patch libs
+        noderp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libnode.so)
+        patchelf --set-rpath $noderp:$out/lib $out/usr/share/nylas-mail/libnode.so
+
+        ffrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libffmpeg.so)
+        patchelf --set-rpath $ffrp:$out/lib $out/usr/share/nylas-mail/libffmpeg.so
+
+        # Patch binaries
+        binrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/nylas)
+        patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" --set-rpath $binrp:$out/lib $out/usr/share/nylas-mail/nylas
+      '';
+
       meta = {
         description = "Nylas Mail is an open-source mail client built on the modern web with Electron, React, and Flux. It is designed to be extensible, so it's easy to create new experiences and workflows around email.";
         license = stdenv.lib.licenses.gpl3;
         homepage = https://nylas.com;
       };
     };
-  in [ nylas-mail ] ++
+  in [ packaged-nylas-mail ] ++
     # System Administration
-    [ oh-my-zsh wget curl git unzip yakuake nix-repl binutils dpkg ] ++
+    [ patchelf oh-my-zsh wget curl git unzip yakuake nix-repl binutils dpkg ] ++
     # Networking
     [ nfs-utils libnfsidmap ] ++
     # utilities
