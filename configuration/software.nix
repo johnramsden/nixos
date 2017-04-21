@@ -89,11 +89,8 @@
                    bash ];
 
     preBuild = ''
+      rm -r Onboard/pypredict/attic
       sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
-      for file in Onboard/pypredict/attic/*; do
-        echo "Copying $file to $file.py"
-        cp $file $file.py;
-      done
     '';
 
     meta = {
