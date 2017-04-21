@@ -23,6 +23,21 @@
         sha256 = "eeaba98898952a8ba3c09ed1fd786dec9e8e977a43b90254e06b13fc24b77cce";
       };
 
+      propagatedBuildInputs = [
+        packaged-nylas-mail
+        gnome2.gtk
+        libgnome_keyring
+        gnome2.gnome_keyring
+        desktop_file_utils
+        python2
+        gnome2.GConf
+        nodejs
+        libnotify
+        xorg.libXtst
+        alsaLib
+        xorg.libXScrnSaver
+      ];
+
       phases = [ "unpackPhase" ];
 
       unpackPhase = ''
@@ -37,25 +52,6 @@
         license = stdenv.lib.licenses.gpl3;
         homepage = https://nylas.com;
       };
-    };
-    nylas-mail = with pkgs; buildFHSUserEnv {
-      name = "nylas-mail";
-      targetPkgs = pkgs: [
-        packaged-nylas-mail
-        gnome2.gtk
-        libgnome_keyring
-        gnome2.gnome_keyring
-        desktop_file_utils
-        python2
-        gnome2.GConf
-        nodejs
-        libnotify
-        xorg.libXtst
-        alsaLib
-        xorg.libXScrnSaver
-      ];
-      multiPkgs = pkgs: [ pkgs.dpkg ];
-      runScript = "./usr/share/nylas-mail/nylas";
     };
   in [ nylas-mail ] ++
     # System Administration
