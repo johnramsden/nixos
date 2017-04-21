@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
-{
-  packaged-nylas-mail = with pkgs; stdenv.mkDerivation rec {
+ stdenv.mkDerivation rec {
     name = "${pkgname}-${version}";
     pkgname = "packaged-nylas-mail";
     version = "2.0.16";
@@ -53,5 +52,4 @@
       license = stdenv.lib.licenses.gpl3;
       homepage = https://nylas.com;
     };
-  };
 }
