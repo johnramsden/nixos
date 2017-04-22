@@ -33,10 +33,33 @@
          gnome2.GConf
          nodejs
          libnotify
-         xorg.libXtst
          alsaLib
-         xorg.libXScrnSaver
          atk
+         glib
+         pango
+         gdk_pixbuf
+         cairo
+         freetype
+         fontconfig
+         dbus
+         xorg.libXScrnSaver
+         xorg.libXi
+         xorg.libXtst
+         xorg.libXcursor
+         xorg.libXdamage
+         xorg.libXrandr
+         xorg.libXcomposite
+         xorg.libXext
+         xorg.libXfixes
+         xorg.libXrender
+         xorg.libX11
+         xorg.libxkbfile
+         nss
+         nspr
+         cups
+         expat
+         wget
+         udev
        ];
 
        phases = [ "unpackPhase" ];
@@ -48,17 +71,17 @@
 
          # Patch libs
          noderp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libnode.so)
-         patchelf --set-rpath $noderp:$out/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+         patchelf --set-rpath $noderp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
              $out/usr/share/nylas-mail/libnode.so
 
          ffrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libffmpeg.so)
-         patchelf --set-rpath $ffrp:$out/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+         patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
              $out/usr/share/nylas-mail/libffmpeg.so
 
          # Patch binaries
          binrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/nylas)
          patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-             --set-rpath $binrp:$out/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+             --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
              $out/usr/share/nylas-mail/nylas
        '';
 
