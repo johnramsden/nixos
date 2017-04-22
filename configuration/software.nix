@@ -24,6 +24,7 @@
       ];
 
       networking = [
+        tightvnc
         nfs-utils
         libnfsidmap
       ];
@@ -90,7 +91,7 @@
         ];
 
         customPackages = [
-          (pkgs.callPackage ./packages/onboard {})
+          #(pkgs.callPackage ./packages/onboard {})
           #(pkgs.callPackage ./packages/nylas-mail {})
         ];
 
@@ -104,8 +105,6 @@
       programming ++
       kdeSoftware ++
       customPackages;
-
-
 
   programs.zsh.enable = true;
 
