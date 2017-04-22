@@ -1,6 +1,35 @@
-{ config, pkgs, ... }:
+{ config
+, stdenv
+, pkgs
+, fetchurl
+, dpkg
+, lib
+, gnome2
+, libgnome_keyring
+, desktop_file_utils
+, python2
+, nodejs
+, libnotify
+, alsaLib
+, atk
+, glib
+, pango
+, gdk_pixbuf
+, cairo
+, freetype
+, fontconfig
+, dbus
+, nss
+, nspr
+, cups
+, expat
+, wget
+, udev
+, libxkbcommon
+, xorg
+}:
 
-with pkgs; stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
    name = "${pkgname}-${version}";
    pkgname = "packaged-nylas-mail";
    version = "2.0.16";
@@ -17,7 +46,7 @@ with pkgs; stdenv.mkDerivation rec {
      gnome2.gnome_keyring
      libgnome_keyring
      desktop_file_utils
-     python2     
+     python2
      nodejs
      libnotify
      alsaLib
@@ -35,19 +64,19 @@ with pkgs; stdenv.mkDerivation rec {
      expat
      wget
      udev
-   ] ++ with xorg [
-     libXScrnSaver
-     libXi
-     libXtst
-     libXcursor
-     libXdamage
-     libXrandr
-     libXcomposite
-     libXext
-     libXfixes
-     libXrender
-     libX11
-     libxkbfile
+     libxkbcommon
+     xorg.libXScrnSaver
+     xorg.libXi
+     xorg.libXtst
+     xorg.libXcursor
+     xorg.libXdamage
+     xorg.libXrandr
+     xorg.libXcomposite
+     xorg.libXext
+     xorg.libXfixes
+     xorg.libXrender
+     xorg.libX11
+     xorg.libxkbfile
    ];
 
    phases = [ "unpackPhase" ];
