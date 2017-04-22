@@ -12,6 +12,16 @@
 
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
+  # Package groups
+  let systemAdministration = [
+        oh-my-zsh
+        wget
+        curl
+        git
+        unzip
+        yakuake
+        nix-repl
+      ];
     let
     packaged-nylas-mail = with pkgs; stdenv.mkDerivation rec {
        name = "${pkgname}-${version}";
@@ -90,52 +100,82 @@
          license = stdenv.lib.licenses.gpl3;
          homepage = https://nylas.com;
        };
-   }; in [ packaged-nylas-mail ] ++
-    # System Administration
-    [ patchelf oh-my-zsh wget curl git unzip yakuake nix-repl binutils dpkg ] ++
-    # Networking
-    [ nfs-utils libnfsidmap ] ++
-    # utilities
-    [ conky pavucontrol xvkbd ] ++
-    #Office
-    [ gimp libreoffice ] ++
-    # Multimedia
-    [ clementine ] ++
-    # Internet
-    [ blink hexchat google-chrome thunderbird deluge ] ++
-    # Programming
-    [ gitkraken idea.clion atom ] ++
-    ## KDE ##
-    [ kdeApplications.akonadi-contacts
-      kdeApplications.akonadi-mime
-      kdeApplications.baloo-widgets
-      kdeApplications.dolphin-plugins
-      kdeApplications.kcachegrind
-      kdeApplications.kdegraphics-mobipocket
-      kdeApplications.kdegraphics-thumbnailers
-      kdeApplications.kdelibs
-      kdeApplications.kdenetwork-filesharing
-      kdeApplications.kdenlive
-      kdeApplications.kdf
-      kdeApplications.kgpg
-      kdeApplications.khelpcenter
-      kdeApplications.kig
-      kdeApplications.kio-extras
-      kdeApplications.kmime
-      kdeApplications.kmix
-      kdeApplications.kompare
-      kdeApplications.konsole
-      kdeApplications.kwalletmanager
-      kdeApplications.libkdcraw
-      kdeApplications.libkexiv2
-      kdeApplications.libkipi
-      kdeApplications.libkomparediff2
-      kdeApplications.marble
-      kdeApplications.okteta
-      kdeApplications.okular
-      kdeApplications.print-manager
-      kdeApplications.spectacle  ];
 
+      networking = [
+        nfs-utils
+        libnfsidmap
+      ];
+
+      utilities = [
+        conky
+        pavucontrol
+        xvkbd
+      ];
+
+      office = [
+        gimp
+        libreoffice
+      ];
+
+      multimedia = [
+        clementine
+      ];
+
+      internet = [
+        blink
+        hexchat
+        google-chrome
+        thunderbird
+        deluge
+      ];
+
+      programming = [
+        gitkraken
+        idea.clion
+        atom
+      ];
+
+      kdeSoftware = with kdeApplications; [
+        akonadi-contacts
+        akonadi-mime
+        baloo-widgets
+        dolphin-plugins
+        kcachegrind
+        kdegraphics-mobipocket
+        kdegraphics-thumbnailers
+        kdelibs
+        kdenetwork-filesharing
+        kdenlive
+        kdf
+        kgpg
+        khelpcenter
+        kig
+        kio-extras
+        kmime
+        kmix
+        kompare
+        konsole
+        kwalletmanager
+        libkdcraw
+        libkexiv2
+        libkipi
+        libkomparediff2
+        marble
+        okteta
+        okular
+        print-manager
+        spectacle
+        ];
+
+    # Packages installed in system profile.
+    in systemAdministration ++
+      networking ++
+      utilities ++
+      office ++
+      multimedia ++
+      internet ++
+      programming ++
+      kdeSoftware;
 
   programs.zsh.enable = true;
 
@@ -171,11 +211,8 @@
                    bash ];
 
     preBuild = ''
+      rm -r Onboard/pypredict/attic
       sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
-      for file in Onboard/pypredict/attic/*; do
-        echo "Copying $file to $file.py"
-        cp $file $file.py;
-      done
     '';
 
     meta = {
