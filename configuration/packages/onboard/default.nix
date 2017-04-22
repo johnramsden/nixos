@@ -1,8 +1,19 @@
 { config
 , pkgs ? import <nixpkgs> {}
 , fetchurl
+, gtk3
+, gnome3
+, libcanberra_gtk3
+, libudev
+, hunspell
+, isocodes
+, pkgconfig
+, xorg
+, libxkbcommon
+, python3
 , python35Packages
-, stdenv, ...
+, stdenv
+, bash
 }:
 
 python35Packages.buildPythonApplication rec {
@@ -17,23 +28,23 @@ python35Packages.buildPythonApplication rec {
   doCheck = false;
 
   propagatedBuildInputs = [
-    pkgs.gtk3
-    pkgs.gnome3.dconf
-    pkgs.libcanberra_gtk3
-    pkgs.libudev
-    pkgs.bash
-    pkgs.hunspell
-    pkgs.isocodes
-    pkgs.pkgconfig
-    pkgs.xorg.libXtst
-    pkgs.xorg.libxkbfile
-    pkgs.libxkbcommon
-    pkgs.python3
-    pkgs.python35Packages.pycairo
-    pkgs.python35Packages.dbus-python
-    pkgs.python35Packages.pygobject3
-    pkgs.python35Packages.systemd
-    pkgs.python35Packages.distutils_extra
+    gtk3
+    gnome3.dconf
+    libcanberra_gtk3
+    libudev
+    bash
+    hunspell
+    isocodes
+    pkgconfig
+    xorg.libXtst
+    xorg.libxkbfile
+    libxkbcommon
+    python3
+    python35Packages.pycairo
+    python35Packages.dbus-python
+    python35Packages.pygobject3
+    python35Packages.systemd
+    python35Packages.distutils_extra
   ];
 
   preBuild = ''
