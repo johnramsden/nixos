@@ -50,6 +50,8 @@ python35Packages.buildPythonApplication rec {
   preBuild = ''
     rm -r Onboard/pypredict/attic
     sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
+    for file in Onboard/pypredict/tools/*; do cp $file $file.py; done
+    cp onboard-settings onboard-settings.py
   '';
 
   meta = {
