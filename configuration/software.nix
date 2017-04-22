@@ -89,6 +89,10 @@
         spectacle
         ];
 
+        customPackages = [
+          (pkgs.callPackage ./packages/onboard {})
+        ];
+
     # Packages installed in system profile.
     in systemAdministration ++
       networking ++
@@ -97,7 +101,10 @@
       multimedia ++
       internet ++
       programming ++
-      kdeSoftware;
+      kdeSoftware ++
+      customPackages;
+
+
 
   programs.zsh.enable = true;
 

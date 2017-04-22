@@ -1,6 +1,11 @@
-{ config, pkgs, ... }:
+{ config
+, pkgs ? import <nixpkgs> {}
+, fetchurl
+, python35Packages
+, stdenv, ...
+}:
 
-with pkgs; python35Packages.buildPythonApplication rec {
+python35Packages.buildPythonApplication rec {
   name = "onboard-${version}";
   majorVersion = "1.4";
   version = "${majorVersion}.1";
@@ -12,24 +17,23 @@ with pkgs; python35Packages.buildPythonApplication rec {
   doCheck = false;
 
   propagatedBuildInputs = [
-     gtk3
-     gnome3.dconf
-     libcanberra_gtk3
-     libudev
-     bash
-     hunspell
-     isocodes
-     pkgconfig
-     xorg.libXtst
-     xorg.libxkbfile
-     libxkbcommon
-     python3
-  ] ++ with python35Packages [
-     pycairo
-     dbus-python
-     pygobject3
-     systemd
-     distutils_extra
+    pkgs.gtk3
+    pkgs.gnome3.dconf
+    pkgs.libcanberra_gtk3
+    pkgs.libudev
+    pkgs.bash
+    pkgs.hunspell
+    pkgs.isocodes
+    pkgs.pkgconfig
+    pkgs.xorg.libXtst
+    pkgs.xorg.libxkbfile
+    pkgs.libxkbcommon
+    pkgs.python3
+    pkgs.python35Packages.pycairo
+    pkgs.python35Packages.dbus-python
+    pkgs.python35Packages.pygobject3
+    pkgs.python35Packages.systemd
+    pkgs.python35Packages.distutils_extra
   ];
 
   preBuild = ''
