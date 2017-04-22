@@ -36,11 +36,13 @@
          xorg.libXtst
          alsaLib
          xorg.libXScrnSaver
+         atk
        ];
 
        phases = [ "unpackPhase" ];
 
        unpackPhase = ''
+       mkdir -p $out/lib
          ${dpkg}/bin/dpkg-deb -x $src unpacked
          cp -r unpacked/* $out/
 
