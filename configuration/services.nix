@@ -52,8 +52,8 @@
     '';
   };
 
-  systemd.services = {
-    znapzend.enable = true;
-  };
+  #systemd.services = {
+  #  
+  #};
 
 }
