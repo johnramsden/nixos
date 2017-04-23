@@ -24,7 +24,7 @@
       ];
 
       networking = [
-        tightvnc
+        tigervnc
         nfs-utils
         libnfsidmap
       ];
@@ -42,6 +42,8 @@
 
       multimedia = [
         clementine
+        vlc
+        ffmpeg
       ];
 
       internet = [
@@ -50,6 +52,7 @@
         google-chrome
         thunderbird
         deluge
+        firefox
       ];
 
       programming = [
