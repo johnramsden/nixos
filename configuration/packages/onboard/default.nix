@@ -40,6 +40,7 @@ python35Packages.buildPythonApplication rec {
     xorg.libXtst
     xorg.libxkbfile
     libxkbcommon
+    intltool
     python3
     python35Packages.pycairo
     python35Packages.dbus-python

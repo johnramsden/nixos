@@ -94,7 +94,7 @@
         ];
 
         customPackages = [
-          #(pkgs.callPackage ./packages/onboard {})
+          (pkgs.callPackage ./packages/onboard {})
           #(pkgs.callPackage ./packages/nylas-mail {})
         ];
 
