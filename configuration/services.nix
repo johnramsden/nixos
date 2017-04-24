@@ -51,4 +51,9 @@
       john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list*, ${pkgs.zfs}/sbin/zpool list*, ${pkgs.zfs}/sbin/zpool status*
     '';
   };
+
+  #systemd.services = {
+  #  
+  #};
+
 }
