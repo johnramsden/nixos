@@ -14,6 +14,9 @@
 , python35Packages
 , stdenv
 , bash
+, intltool
+, wrapGAppsHook
+, glib
 }:
 
 python35Packages.buildPythonApplication rec {
@@ -39,20 +42,27 @@ python35Packages.buildPythonApplication rec {
     xorg.libXtst
     xorg.libxkbfile
     libxkbcommon
+    intltool
+    wrapGAppsHook
     python3
     python35Packages.pycairo
     python35Packages.dbus-python
     python35Packages.pygobject3
     python35Packages.systemd
     python35Packages.distutils_extra
+    glib
   ];
 
   preBuild = ''
     rm -r Onboard/pypredict/attic
-    sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
-    for file in Onboard/pypredict/tools/*; do cp $file $file.py; done
-    cp onboard-settings onboard-settings.py
+    patchShebangs .
+    substituteInPlace  ./setup.py --replace /bin/bash ${bash}/bin/bash
   '';
+
+  postInstall = ''
+    ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
+    cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
+    '';
 
   meta = {
     homepage = https://launchpad.net/onboard;
