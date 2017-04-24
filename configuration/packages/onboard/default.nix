@@ -14,6 +14,7 @@
 , python35Packages
 , stdenv
 , bash
+, intltool
 }:
 
 python35Packages.buildPythonApplication rec {
@@ -49,10 +50,17 @@ python35Packages.buildPythonApplication rec {
 
   preBuild = ''
     rm -r Onboard/pypredict/attic
-    sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
-    for file in Onboard/pypredict/tools/*; do cp $file $file.py; done
-    cp onboard-settings onboard-settings.py
+    patchShebangs .
+    # sed -i 's:/bin/bash:${bash}/bin/bash:' ./setup.py
+    substituteInPlace  ./setup.py --replace /bin/bash ${bash}/bin/bash
+    # find -type f -name "*.py" | xargs --replace "#!/usr/bin/python3"
   '';
+
+  #postInstall = ''
+  #  cp data/org.onboard.gschema.xml $out//usr/share/glib-2.0/schemas/
+  #  glib-compile-schemas $out/usr/share/glib-2.0/schemas
+  #  cp onboard-default-settings.gschema.override.example $out/usr/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
+  #  '';
 
   meta = {
     homepage = https://launchpad.net/onboard;
