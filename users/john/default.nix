@@ -19,5 +19,9 @@
       enable = true;
     };
   };
+  # For syncthing inotify
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches" = 100000;
+  };
 
 }
