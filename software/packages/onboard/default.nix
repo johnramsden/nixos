@@ -15,7 +15,6 @@
 , stdenv
 , bash
 , intltool
-, wrapGAppsHook
 , glib
 }:
 
@@ -43,13 +42,13 @@ python35Packages.buildPythonApplication rec {
     xorg.libxkbfile
     libxkbcommon
     intltool
-    wrapGAppsHook
     python3
     python35Packages.pycairo
     python35Packages.dbus-python
     python35Packages.pygobject3
     python35Packages.systemd
     python35Packages.distutils_extra
+    python35Packages.pyatspi
     glib
   ];
 
@@ -60,8 +59,8 @@ python35Packages.buildPythonApplication rec {
   '';
 
   postInstall = ''
-    ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
     cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
+    ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
     '';
 
   meta = {

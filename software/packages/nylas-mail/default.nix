@@ -92,13 +92,13 @@ stdenv.mkDerivation rec {
          $out/usr/share/nylas-mail/libnode.so
 
      ffrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libffmpeg.so)
-     patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${xorg.libxkbfile.out}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+     patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
          $out/usr/share/nylas-mail/libffmpeg.so
 
      # Patch binaries
      binrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/nylas)
      patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-         --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${xorg.libxkbfile.out}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+         --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
          $out/usr/share/nylas-mail/nylas
    '';
 
