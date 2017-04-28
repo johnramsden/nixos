@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  ## Configuration ##
 
-  ## Packages ##
   nixpkgs.config.allowUnfree = true;
 
+  # Required for current thunderbird
   nixpkgs.config.permittedInsecurePackages = [
          "libplist-1.12"
        ];
 
+  ## Packages ##
 
   # Packages installed in system profile.
   environment.systemPackages = with pkgs;
@@ -44,6 +46,10 @@
         clementine
         vlc
         ffmpeg
+      ];
+
+      gaming = [
+        steam
       ];
 
       internet = [
@@ -104,11 +110,10 @@
       utilities ++
       office ++
       multimedia ++
+      gaming ++
       internet ++
       programming ++
       kdeSoftware ++
       customPackages;
-
-  programs.zsh.enable = true;
 
 }

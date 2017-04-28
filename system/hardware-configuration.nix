@@ -117,6 +117,11 @@
       fsType = "zfs";
     };
 
+  fileSystems."/home/john/.local/share/Steam" =
+    { device = "vault/sys/atom/home/john/local/share/Steam";
+      fsType = "zfs";
+    };
+
   fileSystems."/home/john/.config" =
     { device = "vault/sys/atom/home/john/config";
       fsType = "zfs";
