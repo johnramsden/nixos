@@ -3,11 +3,7 @@
 {
   imports =
   [
-    ./shells/oh-my-zsh
+    ./shells
     ./john
   ];
-
-  programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh ];
-  security.sudo.enable = true;
 }
