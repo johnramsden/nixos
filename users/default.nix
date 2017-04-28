@@ -2,8 +2,9 @@
 
 {
   imports =
-  [ ./john
+  [
     ./shells/oh-my-zsh
+    ./john
   ];
 
   programs.zsh.enable = true;

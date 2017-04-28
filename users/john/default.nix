@@ -17,6 +17,7 @@
     syncthing = {
       useInotify = true;
       enable = true;
+      group = "users";
     };
   };
   # For syncthing inotify
