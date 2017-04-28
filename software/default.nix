@@ -65,6 +65,9 @@
         gitkraken
         idea.clion
         atom
+        ruby
+        bundler
+        nodejs
       ];
 
       kdeSoftware = with kdeApplications; [

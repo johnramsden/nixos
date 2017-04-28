@@ -10,11 +10,18 @@
     ZSH_THEME="af-magic"
     DISABLE_AUTO_UPDATE=true
 
-    plugins=(git systemd ruby gem history sudo node npm nvm zsh-autosuggestions )
+    plugins=(git systemd ruby gem history sudo node zsh-autosuggestions )
 
     source $ZSH/oh-my-zsh.sh
 
-    ## -------- MISC -------- ##
+    ## ------------------- Languages ------------------- ##
+
+    # Dont install software system-wide
+    export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+    PATH="$HOME/.node_modules/bin:$PATH"
+    export npm_config_prefix=~/.node_modules
+
+    ## --------------------- MISC ---------------------- ##
 
     export XDG_CONFIG_HOME=$HOME/.config
     export ELECTRON_TRASH=kioclient5
