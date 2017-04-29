@@ -18,6 +18,7 @@
       useInotify = true;
       enable = true;
       group = "users";
+      user = "john";
     };
   };
   # For syncthing inotify
