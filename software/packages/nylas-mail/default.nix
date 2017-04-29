@@ -27,6 +27,7 @@
 , udev
 , libxkbcommon
 , xorg
+, makeWrapper
 }:
 
 stdenv.mkDerivation rec {
@@ -78,7 +79,7 @@ stdenv.mkDerivation rec {
      xorg.libX11
      xorg.libxkbfile
    ];
-
+   buildInputs = [ makeWrapper ];
    phases = [ "unpackPhase" ];
 
    unpackPhase = ''
@@ -100,6 +101,8 @@ stdenv.mkDerivation rec {
      patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
          --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
          $out/usr/share/nylas-mail/nylas
+
+    wrapProgram $out/usr/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${libgnome_keyring}/lib";
    '';
 
    meta = {
