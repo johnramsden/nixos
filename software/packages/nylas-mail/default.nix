@@ -79,30 +79,38 @@ stdenv.mkDerivation rec {
      xorg.libX11
      xorg.libxkbfile
    ];
-   buildInputs = [ makeWrapper ];
+   buildInputs = [ makeWrapper  ];
    phases = [ "unpackPhase" ];
 
    unpackPhase = ''
-   mkdir -p $out/lib
-     ${dpkg}/bin/dpkg-deb -x $src unpacked
-     cp -r unpacked/* $out/
+    mkdir -p $out
+       ${dpkg}/bin/dpkg-deb -x $src unpacked
+       cp -r unpacked/* $out/
 
-     # Patch libs
-     noderp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libnode.so)
+      # Fix path in desktop file
+    substituteInPlace $out/usr/share/applications/nylas-mail.desktop \
+        --replace /usr/bin/nylas-mail $out/bin
+
+    mv $out/usr/* $out/
+
+     # Patch librariess
+     noderp=$(patchelf --print-rpath $out/share/nylas-mail/libnode.so)
      patchelf --set-rpath $noderp:$out/lib:${stdenv.cc.cc.lib}/lib:${xorg.libxkbfile.out}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
-         $out/usr/share/nylas-mail/libnode.so
+         $out/share/nylas-mail/libnode.so
 
-     ffrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/libffmpeg.so)
+     ffrp=$(patchelf --print-rpath $out/share/nylas-mail/libffmpeg.so)
      patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
-         $out/usr/share/nylas-mail/libffmpeg.so
+         $out/share/nylas-mail/libffmpeg.so
 
      # Patch binaries
-     binrp=$(patchelf --print-rpath $out/usr/share/nylas-mail/nylas)
+     binrp=$(patchelf --print-rpath $out/share/nylas-mail/nylas)
      patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
          --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
-         $out/usr/share/nylas-mail/nylas
+         $out/share/nylas-mail/nylas
 
-    wrapProgram $out/usr/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${libgnome_keyring}/lib";
+    wrapProgram $out/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${libgnome_keyring}/lib";
+
+    rm -r $out/usr/
    '';
 
    meta = {
