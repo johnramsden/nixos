@@ -111,7 +111,7 @@ stdenv.mkDerivation rec {
          --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
          $out/share/nylas-mail/nylas
 
-    wrapProgram $out/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${libgnome_keyring}/lib";
+    wrapProgram $out/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${pkgs.gnome3.libgnome_keyring}/lib";
 
     rm -r $out/usr/
    '';

@@ -4,7 +4,7 @@
   ## Services ##
   services = {
 
-    #gnome3.gnome-keyring.enable = true;
+    gnome3.gnome-keyring.enable = true;
 
     openssh.enable = true;
 
@@ -75,9 +75,4 @@
       }
     ];*/
   };
-
-  #systemd.services = {
-  #
-  #};
-
 }
