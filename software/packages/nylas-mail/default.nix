@@ -26,24 +26,26 @@
 , wget
 , udev
 , xorg
+, libgcrypt
+# , libsecret Will be needed at some point when libgnome_keyring is deprecated
 , makeWrapper
 }:
 
 stdenv.mkDerivation rec {
    name = "${pkgname}-${version}";
    pkgname = "packaged-nylas-mail";
-   version = "2.0.16";
-   subVersion = "4d74cdf";
+   version = "2.0.31";
+   subVersion = "e675deb";
 
    src = fetchurl {
      url = "https://edgehill.s3-us-west-2.amazonaws.com/${version}-${subVersion}/linux-deb/x64/NylasMail.deb";
-     sha256 = "eeaba98898952a8ba3c09ed1fd786dec9e8e977a43b90254e06b13fc24b77cce";
+     sha256 = "b036956174f998bd4a2662a1f59cb4a302465b3ed06c487de88ff2721e372f6e";
    };
 
+   # Build dependencies
    propagatedBuildInputs = [
      gnome2.gtk
      gnome2.GConf
-     gnome2.gnome_keyring
      libgnome_keyring
      desktop_file_utils
      python2
@@ -77,7 +79,10 @@ stdenv.mkDerivation rec {
      xorg.libX11
      xorg.libxkbfile
    ];
-   buildInputs = [ makeWrapper  ];
+
+   # Runtime dependencies
+   buildInputs = [ makeWrapper gnome2.gnome_keyring ];
+
    phases = [ "unpackPhase" ];
 
    unpackPhase = ''
