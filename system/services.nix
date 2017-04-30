@@ -41,6 +41,7 @@
   };
 
   security = {
+
     sudo = {
       enable = true;
       extraConfig = ''
@@ -58,6 +59,20 @@
         john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list*, ${pkgs.zfs}/sbin/zpool list*, ${pkgs.zfs}/sbin/zpool status*
       '';
     };
+
+    pam.services = [
+      { name = "kwallet";
+        enableKwallet = true;
+      }
+      /*{ name = "gnome_keyring"
+        text = ''
+          auth     optional    ${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
+          session  optional    ${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so auto_start
+
+          password	optional	${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
+        '';
+      }*/
+    ];
   };
 
   #systemd.services = {
