@@ -25,7 +25,6 @@
 , expat
 , wget
 , udev
-, libxkbcommon
 , xorg
 , makeWrapper
 }:
@@ -65,7 +64,6 @@ stdenv.mkDerivation rec {
      expat
      wget
      udev
-     libxkbcommon
      xorg.libXScrnSaver
      xorg.libXi
      xorg.libXtst
@@ -89,7 +87,7 @@ stdenv.mkDerivation rec {
 
       # Fix path in desktop file
     substituteInPlace $out/usr/share/applications/nylas-mail.desktop \
-        --replace /usr/bin/nylas-mail $out/bin
+        --replace /usr/bin/nylas-mail $out/bin/nylas-mail
 
     mv $out/usr/* $out/
 

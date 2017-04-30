@@ -3,6 +3,9 @@
 {
   ## Services ##
   services = {
+
+    #gnome3.gnome-keyring.enable = true;
+
     openssh.enable = true;
 
     xserver = {
@@ -40,6 +43,7 @@
     };
   };
 
+
   security = {
 
     sudo = {
@@ -60,19 +64,16 @@
       '';
     };
 
-    pam.services = [
-      { name = "kwallet";
-        enableKwallet = true;
-      }
-      /*{ name = "gnome_keyring"
+    /*pam.services = [
+      { name = "gnome_keyring";
         text = ''
-          auth     optional    ${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
-          session  optional    ${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so auto_start
+          auth     optional    ${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
+          session  optional    ${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so auto_start
 
-          password	optional	${gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
+          password	optional	${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
         '';
-      }*/
-    ];
+      }
+    ];*/
   };
 
   #systemd.services = {
