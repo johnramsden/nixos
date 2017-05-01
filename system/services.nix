@@ -3,10 +3,10 @@
 {
   ## Services ##
   services = {
-
-    gnome3.gnome-keyring.enable = true;
-
+    logcheck.mailTo = "root";
     openssh.enable = true;
+    rpcbind.enable = true;
+    znapzend.enable = true;
 
     xserver = {
       enable = true;
@@ -36,6 +36,11 @@
       };
     };
 
+    smartd = {
+      enable = true;
+      notifications.mail.enable = true;
+    };
+
     zfs = {
       autoScrub.enable = true;
       autoScrub.interval = "monthly";
@@ -63,16 +68,5 @@
         john ALL=NOPASSWD: ${pkgs.zfs}/sbin/zfs list*, ${pkgs.zfs}/sbin/zpool list*, ${pkgs.zfs}/sbin/zpool status*
       '';
     };
-
-    /*pam.services = [
-      { name = "gnome_keyring";
-        text = ''
-          auth     optional    ${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
-          session  optional    ${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so auto_start
-
-          password	optional	${pkgs.gnome3.gnome_keyring}/lib/security/pam_gnome_keyring.so
-        '';
-      }
-    ];*/
   };
 }
