@@ -3,4 +3,4 @@ ssh/*
 linphonerc.tmp
 private-keys*
 .directory
-**/.sync-conflict*
+**/*.sync-conflict*
