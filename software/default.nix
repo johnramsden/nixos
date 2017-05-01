@@ -35,7 +35,6 @@
         conky
         pavucontrol
         xvkbd
-        gnome2.gnome_keyring
       ];
 
       office = [
@@ -106,7 +105,7 @@
 
         customPackages = [
           #(pkgs.callPackage ./packages/onboard {})
-          (pkgs.callPackage ./packages/nylas-mail {})
+          #(pkgs.callPackage ./packages/nylas-mail {})
         ];
 
     # Packages installed in system profile.
