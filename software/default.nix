@@ -59,6 +59,7 @@
         thunderbird
         deluge
         firefox
+
       ];
 
       programming = [

@@ -14,6 +14,7 @@
 
   # Services Drectly Connected to john
   services = {
+    gnome3.gnome-keyring.enable = true;
     syncthing = {
       useInotify = true;
       enable = true;
@@ -21,6 +22,7 @@
       user = "john";
     };
   };
+  
   # For syncthing inotify
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 204800;
