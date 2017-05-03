@@ -1,8 +1,13 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   ##  ZSH Configuration  ##
-  environment.interactiveShellInit = ''
+  #environment.interactiveShellInit = '''';
+
+  programs.zsh.promptInit = "";
+
+  # Force shellinit text to end
+  programs.zsh.interactiveShellInit = lib.mkForce ''
     COMPUTER="atom"
     ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
     HISTFILE=$HOME/Computer/System/atom/oh-my-zsh/zsh_history
@@ -27,7 +32,5 @@
     export ELECTRON_TRASH=kioclient5
     export EDITOR="nano"
     export XENVIRONMENT=$HOME/.Xdefaults
-  '';
-
-  programs.zsh.promptInit = "";
+    '';
 }
