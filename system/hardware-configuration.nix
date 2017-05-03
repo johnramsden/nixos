@@ -13,27 +13,27 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "vault/sys/atom/ROOT/default";
+    { device = "vault/sys/atom/ROOT/17.03";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "vault/sys/atom/ROOT/default/nix";
+    { device = "vault/sys/atom/ROOT/17.03/nix";
       fsType = "zfs";
     };
 
   fileSystems."/nix/store" =
-    { device = "vault/sys/atom/ROOT/default/nix/store";
+    { device = "vault/sys/atom/ROOT/17.03/nix/store";
       fsType = "zfs";
     };
 
   fileSystems."/var" =
-    { device = "vault/sys/atom/ROOT/default/var";
+    { device = "vault/sys/atom/ROOT/17.03/var";
       fsType = "zfs";
     };
 
   fileSystems."/var/lib" =
-    { device = "vault/sys/atom/ROOT/default/var/lib";
+    { device = "vault/sys/atom/ROOT/17.03/var/lib";
       fsType = "zfs";
     };
 
@@ -43,7 +43,7 @@
     };
 
   fileSystems."/nix/.ro-store" =
-    { device = "vault/sys/atom/ROOT/default/nix/ro-store";
+    { device = "vault/sys/atom/ROOT/17.03/nix/ro-store";
       fsType = "zfs";
     };
 
@@ -58,17 +58,17 @@
     };
 
   fileSystems."/var/lib/systemd" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/systemd";
+    { device = "vault/sys/atom/ROOT/17.03/var/lib/systemd";
       fsType = "zfs";
     };
 
   fileSystems."/nix/var" =
-    { device = "vault/sys/atom/ROOT/default/nix/var";
+    { device = "vault/sys/atom/ROOT/17.03/nix/var";
       fsType = "zfs";
     };
 
   fileSystems."/var/lib/nixos" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/nixos";
+    { device = "vault/sys/atom/ROOT/17.03/var/lib/nixos";
       fsType = "zfs";
     };
 
@@ -78,12 +78,12 @@
     };
 
   fileSystems."/var/lib/containers" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/containers";
+    { device = "vault/sys/atom/ROOT/17.03/var/lib/containers";
       fsType = "zfs";
     };
 
   fileSystems."/nix/.rw-store" =
-    { device = "vault/sys/atom/ROOT/default/nix/rw-store";
+    { device = "vault/sys/atom/ROOT/17.03/nix/rw-store";
       fsType = "zfs";
     };
 
@@ -93,17 +93,17 @@
     };
 
   fileSystems."/var/lib/systemd/coredump" =
-    { device = "vault/sys/atom/ROOT/default/var/lib/systemd/coredump";
+    { device = "vault/sys/atom/ROOT/17.03/var/lib/systemd/coredump";
       fsType = "zfs";
     };
 
   fileSystems."/nix/var/log" =
-    { device = "vault/sys/atom/ROOT/default/nix/var/log";
+    { device = "vault/sys/atom/ROOT/17.03/nix/var/log";
       fsType = "zfs";
     };
 
   fileSystems."/nix/var/nix" =
-    { device = "vault/sys/atom/ROOT/default/nix/var/nix";
+    { device = "vault/sys/atom/ROOT/17.03/nix/var/nix";
       fsType = "zfs";
     };
 
@@ -128,7 +128,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6E67-E683";
+    { device = "/dev/disk/by-uuid/F2F4-47DC";
       fsType = "vfat";
     };
 
