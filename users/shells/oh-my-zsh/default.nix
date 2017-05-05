@@ -2,8 +2,6 @@
 
 {
   ##  ZSH Configuration  ##
-  #environment.interactiveShellInit = '''';
-
   programs.zsh.promptInit = "";
 
   # Force shellinit text to end
