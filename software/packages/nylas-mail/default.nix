@@ -29,6 +29,8 @@
 , libgcrypt
 # , libsecret Will be needed at some point when libgnome_keyring is deprecated
 , makeWrapper
+, gcc-unwrapped
+, coreutils
 }:
 
 stdenv.mkDerivation rec {
@@ -66,6 +68,8 @@ stdenv.mkDerivation rec {
      expat
      wget
      udev
+     gcc-unwrapped
+     coreutils
      xorg.libXScrnSaver
      xorg.libXi
      xorg.libXtst
@@ -87,14 +91,13 @@ stdenv.mkDerivation rec {
 
    unpackPhase = ''
     mkdir -p $out
-       ${dpkg}/bin/dpkg-deb -x $src unpacked
-       cp -r unpacked/* $out/
 
-      # Fix path in desktop file
-    substituteInPlace $out/usr/share/applications/nylas-mail.desktop \
+    ${dpkg}/bin/dpkg-deb -x $src unpacked
+    mv unpacked/usr/* $out/
+
+    # Fix path in desktop file
+    substituteInPlace $out/share/applications/nylas-mail.desktop \
         --replace /usr/bin/nylas-mail $out/bin/nylas-mail
-
-    mv $out/usr/* $out/
 
      # Patch librariess
      noderp=$(patchelf --print-rpath $out/share/nylas-mail/libnode.so)
@@ -113,7 +116,15 @@ stdenv.mkDerivation rec {
 
     wrapProgram $out/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${pkgs.gnome3.libgnome_keyring}/lib";
 
-    rm -r $out/usr/
+    # Fix path to bash so apm can install plugins.
+    substituteInPlace $out/share/nylas-mail/resources/apm/bin/apm \
+          -- replace /bin/bash ${stdenv.shell}
+
+    wrapProgram $out/share/nylas-mail/resources/apm/bin/apm \
+        --set PATH "${coreutils}/bin"
+    patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+             --set-rpath ${gcc-unwrapped.lib}/lib \
+        $out/share/nylas-mail/resources/apm/bin/node
    '';
 
    meta = {

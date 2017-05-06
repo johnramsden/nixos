@@ -11,6 +11,9 @@
       systemd-boot.enable = true;
     };
 
+    # Added for iommu
+    kernelParams = [ "intel_iommu=on" ];
+
     # Do not forcefully importpool or root.
     zfs.forceImportAll = false;
     zfs.forceImportRoot = false;
