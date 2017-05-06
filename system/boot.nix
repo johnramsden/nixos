@@ -11,8 +11,9 @@
       systemd-boot.enable = true;
     };
 
-    # Added for iommu
-    kernelParams = [ "intel_iommu=on" ];
+    # Add for iommu
+    #kernelParams = [ "intel_iommu=on" ];
+    #kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ];
 
     # Do not forcefully importpool or root.
     zfs.forceImportAll = false;
@@ -23,4 +24,6 @@
 
   fileSystems."/nix".neededForBoot = true;
   fileSystems."/nix/store".neededForBoot = true;
+
+
 }

@@ -3,7 +3,7 @@
 {
   ## Configuration ##
 
-  nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = true;
 
   # Required for current thunderbird
   nixpkgs.config.permittedInsecurePackages = [
@@ -106,7 +106,7 @@
 
         customPackages = [
           #(pkgs.callPackage ./packages/onboard {})
-          (pkgs.callPackage ./packages/nylas-mail {})
+          #(pkgs.callPackage ./packages/nylas-mail {})
         ];
 
     # Packages installed in system profile.

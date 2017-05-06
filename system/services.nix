@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  # ZED Config edit
+  #imports = [ ./zfs/alter-zed ];
+
   ## Services ##
   services = {
     logcheck.mailTo = "root";
@@ -47,7 +50,6 @@
       autoSnapshot.enable = true;
     };
   };
-
 
   security = {
 
