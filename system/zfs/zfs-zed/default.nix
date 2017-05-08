@@ -1,5 +1,6 @@
 { pkgs, lib, config, ... }:
 
+# Edit the cnfig file in /etc/zfs/zed.d
 let
   zfsUser = if config.boot.zfs.enableUnstable then pkgs.zfsUnstable else pkgs.zfs;
   newcfg = pkgs.runCommand "newcfg" {} ''

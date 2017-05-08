@@ -2,11 +2,11 @@
 
 {
   # ZED Config edit
-  #imports = [ ./zfs/alter-zed ];
+  imports = [ ./zfs/zfs-zed ];
+  systemd.services.zfs-zed.enable = true;
 
   ## Services ##
   services = {
-    logcheck.mailTo = "root";
     openssh.enable = true;
     rpcbind.enable = true;
     znapzend.enable = true;
