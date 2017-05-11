@@ -15,13 +15,13 @@
   # Services Drectly Connected to john
   services = {
     gnome3.gnome-keyring.enable = true;
+
     syncthing = {
       openDefaultPorts = true;
       useInotify = true;
       enable = true;
       group = "users";
       user = "john";
-
     };
   };
 

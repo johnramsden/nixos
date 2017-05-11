@@ -7,8 +7,8 @@ let
     cp -vir ${zfsUser}/etc/zfs/zed.d/ $out
     chmod +w $out/zed.rc
     cat >> $out/zed.rc <<EOF
-    ZED_EMAIL_ADDR="root"
-    ZED_EMAIL_PROG="sendmail"
+    ZED_EMAIL_ADDR="system@atom.ramsden.network"
+    ZED_EMAIL_PROG="/run/wrappers/bin/sendmail"
     ZED_NOTIFY_VERBOSE=1
     EOF
   '';
