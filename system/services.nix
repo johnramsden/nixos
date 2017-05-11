@@ -1,9 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  # ZED Config edit
+  imports = [ ./zfs/zfs-zed ];
+  systemd.services.zfs-zed.enable = true;
+
   ## Services ##
   services = {
-    logcheck.mailTo = "root";
     openssh.enable = true;
     rpcbind.enable = true;
     znapzend.enable = true;
@@ -47,7 +50,6 @@
       autoSnapshot.enable = true;
     };
   };
-
 
   security = {
 

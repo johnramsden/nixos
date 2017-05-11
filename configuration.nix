@@ -14,6 +14,8 @@
     automatic = true;
     dates = "20:15";
   };
+  # Build inside chroot
+  nix.useSandbox = true;
 
   # Select internationalisation properties.
   i18n = {

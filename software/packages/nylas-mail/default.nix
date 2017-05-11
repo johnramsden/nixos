@@ -118,7 +118,7 @@ stdenv.mkDerivation rec {
 
     # Fix path to bash so apm can install plugins.
     substituteInPlace $out/share/nylas-mail/resources/apm/bin/apm \
-          -- replace /bin/bash ${stdenv.shell}
+          --replace /bin/bash ${stdenv.shell}
 
     wrapProgram $out/share/nylas-mail/resources/apm/bin/apm \
         --set PATH "${coreutils}/bin"
