@@ -23,6 +23,7 @@
         unzip
         yakuake
         nix-repl
+        gnupg gnupg1
       ];
 
       networking = [
