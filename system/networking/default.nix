@@ -4,8 +4,8 @@
   ## Main Network Configuration ##
   imports =
   [ # Default network setup, use this OR bridge
-    ./network.nix
-    # ./bridge.nix
+    #./network.nix
+    ./bridge.nix
 
     ./mail.nix
   ];
