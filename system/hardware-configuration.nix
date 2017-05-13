@@ -82,6 +82,16 @@
       fsType = "zfs";
     };
 
+  fileSystems."/var/lib/lxc" =
+    { device = "vault/sys/atom/var/lib/lxc";
+      fsType = "zfs";
+    };
+
+  fileSystems."/home/john/.local/share/lxc" =
+    { device = "vault/sys/atom/home/john/local/share/lxc";
+      fsType = "zfs";
+    };
+
   fileSystems."/nix/.rw-store" =
     { device = "vault/sys/atom/ROOT/17.03/nix/rw-store";
       fsType = "zfs";

@@ -3,7 +3,7 @@
 {
   ## Configuration ##
 
-    nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # Required for current thunderbird
   nixpkgs.config.permittedInsecurePackages = [
@@ -23,6 +23,7 @@
         unzip
         yakuake
         nix-repl
+        gnupg gnupg1
       ];
 
       networking = [
@@ -67,6 +68,10 @@
         gitkraken
         idea.clion
         atom
+      ];
+
+      # Required libraries and such for development.
+      dev = [
         ruby
         bundler
         nodejs
@@ -106,7 +111,7 @@
 
         customPackages = [
           #(pkgs.callPackage ./packages/onboard {})
-          #(pkgs.callPackage ./packages/nylas-mail {})
+          (pkgs.callPackage ./packages/nylas-mail {})
         ];
 
     # Packages installed in system profile.
@@ -117,7 +122,7 @@
       multimedia ++
       gaming ++
       internet ++
-      programming ++
+      programming ++ dev ++
       kdeSoftware ++
       customPackages;
 
