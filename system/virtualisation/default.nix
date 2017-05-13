@@ -2,10 +2,13 @@
 
 {
   services.cgmanager.enable = true;
-
+  security.apparmor.enable = true;
   virtualisation = {
     lxc = {
       enable = true;
+      defaultConfig = ''
+        lxc.include = ${pkgs.lxcfs}/share/lxc/config/common.conf.d/00-lxcfs.conf
+      '';
       systemConfig = ''
         lxc.rootfs.backend = zfs
         lxc.lxcpath = /var/lib/lxc
@@ -16,6 +19,7 @@
       usernetConfig = ''
         john veth lxcbr0 10
       '';
+      lxcfs.enable = true;
     };
   };
 }
