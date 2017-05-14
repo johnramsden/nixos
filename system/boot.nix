@@ -12,8 +12,8 @@
     };
 
     # Add for iommu
-    #kernelParams = [ "intel_iommu=on" ];
-    #kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ];
+    kernelParams = [ "intel_iommu=on" ];
+    kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ];
 
     # Do not forcefully importpool or root.
     zfs.forceImportAll = false;
