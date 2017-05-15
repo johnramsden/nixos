@@ -1,10 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    imports =
-    [
-      ./services.nix
-    ];
+    imports = [ ./services.nix ./zfs ];
 
   ## Hardware Related
   hardware = {

@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # ZED Config edit
-  imports = [ ./zfs/zfs-zed ];
-  systemd.services.zfs-zed.enable = true;
 
   ## Services ##
   services = {
@@ -42,12 +39,6 @@
     smartd = {
       enable = true;
       notifications.mail.enable = true;
-    };
-
-    zfs = {
-      autoScrub.enable = true;
-      autoScrub.interval = "monthly";
-      autoSnapshot.enable = true;
     };
   };
 
