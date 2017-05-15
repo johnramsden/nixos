@@ -4,17 +4,15 @@ let
   useBridge = true;
   ip = { address = "172.20.20.2"; prefixLength = 24; };
 in
-
 {
-
   ## Common Network Configuration ##
-  imports =
-  [ # Default network setup, use this OR bridge
-    #./network.nix
-    #./bridge.nix
-    ./mail.nix
-  ];
+  imports = [ ./mail.nix ];
 
+  time.timeZone = "Canada/Pacific";
+
+  # Use recursiveUpdate so that defaultGateway propagates to
+  # the second set. If // is used instead, you get:
+  # `networking.defaultGateway.address' is used but not defined.
   networking = lib.recursiveUpdate {
     hostName = "atom";
     hostId = "14ac0214";
@@ -34,5 +32,4 @@ in
     interfaces.eno1.ip4 = [ ip ];
   });
 
-  time.timeZone = "Canada/Pacific";
 }
