@@ -7,7 +7,7 @@
     ./services.nix
     ./hardware.nix
     ./boot.nix
-    ./virtualisation
+    ./virtualization
     ./networking
   ];
 
