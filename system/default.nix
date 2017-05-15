@@ -3,11 +3,9 @@
 {
   imports =
   [
-    ./hardware-configuration.nix
-    ./services.nix
-    ./hardware.nix
-    ./boot.nix
-    ./virtualisation
+    ./services
+    ./boot
+    ./virtualization
     ./networking
   ];
 
