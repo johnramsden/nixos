@@ -8,10 +8,6 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" =
     { device = "vault/sys/atom/ROOT/17.03";
       fsType = "zfs";
@@ -20,11 +16,13 @@
   fileSystems."/nix" =
     { device = "vault/sys/atom/ROOT/17.03/nix";
       fsType = "zfs";
+      neededForBoot = true;
     };
 
   fileSystems."/nix/store" =
     { device = "vault/sys/atom/ROOT/17.03/nix/store";
       fsType = "zfs";
+      neededForBoot = true;
     };
 
   fileSystems."/var" =

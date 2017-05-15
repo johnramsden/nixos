@@ -3,10 +3,8 @@
 {
   imports =
   [
-    ./hardware-configuration.nix
-    ./services.nix
-    ./hardware.nix
-    ./boot.nix
+    ./services
+    ./boot
     ./virtualization
     ./networking
   ];
