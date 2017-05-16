@@ -17,7 +17,7 @@
         Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
       '';
 
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "nvidia" "intel" ]; # Tried in order:  
 
       desktopManager.plasma5.enable = true;
 
