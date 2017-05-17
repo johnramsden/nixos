@@ -13,11 +13,9 @@
       layout = "us";
 
       # Tearing fix
-      screenSection = ''
-        Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
-      '';
+      #screenSection = ''Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"'';
 
-      videoDrivers = [ "nvidia" "intel" ]; # Tried in order:  
+      videoDrivers = [ "intel" ]; # Tried in order:
 
       desktopManager.plasma5.enable = true;
 
