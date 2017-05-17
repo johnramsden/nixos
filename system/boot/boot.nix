@@ -2,7 +2,7 @@
 
 {
   hardware.cpu.intel.updateMicrocode = true;
-
+  
   boot = {
     tmpOnTmpfs = true;
     cleanTmpDir = true;

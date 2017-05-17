@@ -3,10 +3,10 @@
 {
   imports =
   [
-    ./filesystems.nix
+    ./filesystems
     ./boot.nix
   ];
 
-  
+
 
 }

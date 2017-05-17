@@ -9,4 +9,5 @@
     ./networking
   ];
 
+  powerManagement.cpuFreqGovernor = "powersave";
 }

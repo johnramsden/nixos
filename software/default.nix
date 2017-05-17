@@ -4,7 +4,8 @@
   ## Configuration ##
 
   nixpkgs.config.allowUnfree = true;
-
+  nix.maxJobs = lib.mkDefault 8;
+  
   # Required for current thunderbird
   nixpkgs.config.permittedInsecurePackages = [
          "libplist-1.12"
@@ -37,6 +38,8 @@
         conky
         pavucontrol
         xvkbd
+        pinentry
+        keybase
       ];
 
       office = [
@@ -48,6 +51,7 @@
         clementine
         vlc
         ffmpeg
+        shotwell
       ];
 
       gaming = [
