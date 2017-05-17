@@ -23,6 +23,5 @@
     zfs.forceImportAll = false;
     zfs.forceImportRoot = false;
     initrd.supportedFilesystems = [ "zfs" ];
-    supportedFilesystems = [ "zfs" ];
   };
 }
