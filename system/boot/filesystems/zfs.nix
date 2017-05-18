@@ -22,11 +22,17 @@ let
       fsType = "zfs";
     };
 
+  makeZfsDatasetFromBootEnv = bed:
+    {
+      makeZfsDataset { "${bed}" };
+    };
+
 in
 {
     fileSystems =
-    (map makeZfsDataset complicatedDatasets);
+    (map makeZfsDataset complicatedDatasets) ++
+    (map makeZfsDatasetFromBootEnv bootEnvDatasets);
 
     /*(map ({ mount, dataset ? "${baseDataset}/${bootEnvironmentName}${mount}" }:
-        { mountPoint = "${mount}"; device = "${dataset}"; fsType = "zfs"; }) datasets);*/
+        { mountPoint = "${mount}"; device = "${dataset-}"; fsType = "zfs"; }) datasets);*/
 }
