@@ -12,7 +12,7 @@
       enable = true;
       layout = "us";
 
-      # Tearing fix
+      # Tearing fix when using nvidia
       #screenSection = ''Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"'';
 
       videoDrivers = [ "intel" ]; # Tried in order:

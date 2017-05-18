@@ -4,7 +4,7 @@
   imports =
   [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ./zfs.nix
+    #./zfs.nix
     ./nfs.nix
   ];
 
@@ -24,9 +24,9 @@
       options = [ "uid=1000" "gid=100"];
     };
 
-    swapDevices =
-      [ { device = "/dev/disk/by-uuid/de6bf709-e584-453f-a385-861af726c5bd"; }
-      ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/de6bf709-e584-453f-a385-861af726c5bd"; }
+    ];
 
       fileSystems."/" =
         { device = "vault/sys/atom/ROOT/17.03";
@@ -95,11 +95,6 @@
           fsType = "zfs";
         };
 
-      fileSystems."/var/lib/containers" =
-        { device = "vault/sys/atom/ROOT/17.03/var/lib/containers";
-          fsType = "zfs";
-        };
-
       fileSystems."/var/lib/lxc" =
         { device = "vault/sys/atom/var/lib/lxc";
           fsType = "zfs";
@@ -145,10 +140,15 @@
           fsType = "zfs";
         };
 
-      /*fileSystems."/home/john/.local/share/lxc" =
-        { device = "vault/sys/atom/home/john/local/share/lxc";
+      /*fileSystems."/var/lib/containers" =
+        { device = "vault/sys/atom/ROOT/17.03/var/lib/containers";
           fsType = "zfs";
         };*/
+
+        /*fileSystems."/home/john/.local/share/lxc" =
+          { device = "vault/sys/atom/home/john/local/share/lxc";
+            fsType = "zfs";
+          };*/
 
       fileSystems."/home/john/.config" =
         { device = "vault/sys/atom/home/john/config";

@@ -2,18 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, ... }:
-/*let
-  baseDataset = "vault/sys/atom";
-  bootEnvironmentName = "/ROOT/17.03";
-  datasets = [ { mountPoint = "/home/john/.local/share/lxc";
-                 dataset = "vault/sys/atom/home/john/local/share/lxc"; }
-             ];
-in
-rec {
 
-  fileSystems =
-    map ({ mountPoint, dataset ? "${baseDataset}${bootEnvironmentName}${mountPoint}" }:
-        { "${mountPoint}" = { device = "${dataset}"; fsType = "zfs"; }; }) datasets;*/
 {
   fileSystems."/mnt/lilan/Data" =
     { device = "lilan.ramsden.network:/mnt/tank/data/Atreides";

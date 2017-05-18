@@ -4,35 +4,27 @@ let
   baseDataset = "vault/sys/atom";
   bootEnvironmentName = "ROOT/17.03";
 
-  bootEnvDatasets = [
-    "/var/lib/containers"
-  ];
-  regularDatasets = [
-
-  ];
   complicatedDatasets = [
     { mount = "/home/john/.local/share/lxc";
       dataset = "vault/sys/atom/home/john/local/share/lxc"; }
   ];
 
-  makeZfsDataset  = { mount, dataset ? "${baseDataset}/${bootEnvironmentName}${mount}" }:
-    {
-      mountPoint = "${mount}";
+  makeZfsDataset  = { mount, dataset }:
+    { mountPoint = "${mount}";
       device = "${dataset}";
       fsType = "zfs";
     };
 
   makeZfsDatasetFromBootEnv = bed:
-    {
-      makeZfsDataset { "${bed}" };
-    };
+    makeZfsDataset ({ mount = bed; dataset = "${baseDataset}/${bootEnvironmentName}/${bed}"; });
 
+    /*fileSystems."/var/lib/containers" =
+      { device = "vault/sys/atom/ROOT/17.03/var/lib/containers";
+        fsType = "zfs";
+      };*/
 in
 {
-    fileSystems =
-    (map makeZfsDataset complicatedDatasets) ++
-    (map makeZfsDatasetFromBootEnv bootEnvDatasets);
+    fileSystems = (map makeZfsDataset complicatedDatasets);
+                  #++ {map makeZfsDatasetFromBootEnv};
 
-    /*(map ({ mount, dataset ? "${baseDataset}/${bootEnvironmentName}${mount}" }:
-        { mountPoint = "${mount}"; device = "${dataset-}"; fsType = "zfs"; }) datasets);*/
 }
