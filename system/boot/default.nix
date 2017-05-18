@@ -1,12 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-  [
-    ./filesystems
-    ./boot.nix
-  ];
-
-
+  imports = [ ./filesystems ./boot.nix ];
 
 }

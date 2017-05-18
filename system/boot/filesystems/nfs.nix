@@ -10,9 +10,6 @@
              ];
 in
 rec {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
 
   fileSystems =
     map ({ mountPoint, dataset ? "${baseDataset}${bootEnvironmentName}${mountPoint}" }:
@@ -95,11 +92,4 @@ rec {
       fsType = "nfs";
       options = [ "noauto" "x-systemd.automount" "x-systemd.device-timeout=175" "timeo=15" "x-systemd.idle-timeout=1min" "user" ];
     };
-
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/de6bf709-e584-453f-a385-861af726c5bd"; }
-    ];
-
-  nix.maxJobs = lib.mkDefault 8;
-  powerManagement.cpuFreqGovernor = "powersave";
 }
