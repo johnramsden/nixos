@@ -37,6 +37,7 @@
         conky
         pavucontrol
         xvkbd
+        virtmanager
       ];
 
       office = [
@@ -48,6 +49,7 @@
         clementine
         vlc
         ffmpeg
+        shotwell
       ];
 
       gaming = [
