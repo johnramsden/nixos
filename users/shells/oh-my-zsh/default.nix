@@ -26,6 +26,7 @@
 
     ## --------------------- MISC ---------------------- ##
 
+    export GPG_TTY=$(tty)    
     export XDG_CONFIG_HOME=$HOME/.config
     export ELECTRON_TRASH=kioclient5
     export EDITOR="nano"
