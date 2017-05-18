@@ -25,6 +25,7 @@
         yakuake
         nix-repl
         gnupg gnupg1
+        pinentry_qt5
       ];
 
       networking = [
