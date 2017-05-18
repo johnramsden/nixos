@@ -1,18 +1,18 @@
 { config, pkgs, ... }:
 
 {
-    imports = [ ./services.nix ./zfs ];
+    imports = [ ./security.nix ./graphics.nix ./zfs ];
 
-  ## Hardware Related
-  hardware = {
-    # Sound
-    pulseaudio = {
+  ## Services ##
+  services = {
+    openssh.enable = true;
+    rpcbind.enable = true;
+    znapzend.enable = true;
+
+    smartd = {
       enable = true;
-      # 32bit ALSA apps integration, needed for steam
-      support32Bit = true;
-  };
-    # Acceleration, audio for 32-bit programs, needed for steam
-    opengl.driSupport32Bit = true;
+      notifications.mail.enable = true;
+    };
   };
 
 }
