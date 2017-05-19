@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 {
+
+  imports = [
+    # Add Firmware
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    ./filesystems
+  ];
+
   hardware.cpu.intel.updateMicrocode = true;
 
   boot = {
@@ -23,5 +30,10 @@
     zfs.forceImportAll = false;
     zfs.forceImportRoot = false;
     initrd.supportedFilesystems = [ "zfs" ];
+
+    # Sysctls
+    kernel.sysctl = {
+      "fs.inotify.max_user_watches" = 204800; # For syncthing inotify
+    };
   };
 }
