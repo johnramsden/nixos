@@ -11,7 +11,7 @@ let
       ];
 
       bootEnvironmentDatasets = [
-        "/" "/nix" "/nix/store" "/var" "/var/lib" "/nix/var"
+        "/nix" "/nix/store" "/var" "/var/lib" "/nix/var"
         "/var/lib/nixos" "/nix/var/nix" "/var/lib/systemd" "/nix/var/log"
         "/var/lib/systemd/coredump" "/var/lib/containers"
 
@@ -28,6 +28,9 @@ let
       ];
 
       differentMountPointDatasets = [
+        { mount = "/";
+          ds = "${baseDataset}/${bootEnvironment}"; }
+
         { mount = "/nix/.ro-store";
           ds = "${baseDataset}/${bootEnvironment}/nix/ro-store"; }
 
@@ -59,7 +62,7 @@ in
                                                                   datasets.regularDatasets) ++
     (map (ds: { mountPoint = ds; device = "${baseDataset}/${bootEnvironment}${ds}"; fsType = "zfs";})
                                                                   datasets.bootEnvironmentDatasets) ++
-    (map (ds: {mountPoint = "/home/john/${ds}"; device = "${storageDataset}/${ds}"; fsType = "zfs";})
+    (map (ds: {mountPoint = "/home/john${ds}"; device = "${storageDataset}${ds}"; fsType = "zfs";})
                                                                   datasets.storageDatasets) ++
     (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
                                                                   datasets.differentMountPointDatasets);
