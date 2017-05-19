@@ -10,7 +10,7 @@
   users.users.john = {
         name = "john";
         group = "john";
-        extraGroups = [ "wheel" "networkmanager" "audio" "users" ];
+        extraGroups = [ "wheel" "networkmanager" "audio" "users" "libvirtd" ];
         uid = 1000;
         home = "/home/john";
         shell = pkgs.zsh;

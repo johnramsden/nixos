@@ -2,7 +2,7 @@
 
 {
 
-  imports = [ ./lxc ];
+  imports = [ ./lxc ./iommu ];
 
   virtualisation = {
     libvirtd.enable = true;
