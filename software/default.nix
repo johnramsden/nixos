@@ -125,6 +125,7 @@
 
     # Packages installed in system profile.
     in systemAdministration ++
+      virtualization ++
       networking ++
       utilities ++
       office ++
