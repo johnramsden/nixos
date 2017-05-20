@@ -2,9 +2,8 @@
 
 {
   boot = {
-
     kernelParams = [ "intel_iommu=on" ];
-    kernelModules = [ "kvm-intel" "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" ];
+    kernelModules = [ "vfio" "vfio_iommu_type1" "vfio_pci" "vfio_virqfd" "irqbypass" "kvm-intel" ];
 
     # PCI id's of graphics card
     extraModprobeConfig = ''
