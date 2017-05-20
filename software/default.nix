@@ -28,6 +28,11 @@
         pinentry_qt5
       ];
 
+      virtualization = [
+        virtmanager
+        OVMF qemu
+      ];
+
       networking = [
         tigervnc
         nfs-utils
@@ -41,7 +46,6 @@
         xvkbd
         pinentry
         keybase
-        virtmanager
       ];
 
       office = [
@@ -67,7 +71,6 @@
         thunderbird
         deluge
         firefox
-
       ];
 
       programming = [
