@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./environment.nix ];
+
   users.groups = {
     john = {
       gid = 1000;
