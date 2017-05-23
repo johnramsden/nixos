@@ -20,4 +20,7 @@ in
     fi
   '';
 
+  # Alternative:
+  #system.activationScripts.johnQemu = '' '';
+
 }

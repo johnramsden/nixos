@@ -20,6 +20,15 @@ in
     domain = "ramsden.network";
     defaultGateway.address = "172.20.20.1";
 
+    firewall = {
+      #enable = true;
+      # Open ports for Steam - https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
+      allowedTCPPorts = [ 27036 27037 ];
+      #allowedTCPPortRanges = [ { from = ; to = ; } ];
+      allowedUDPPorts = [ 4380 27031 27036 ];
+      allowedUDPPortRanges = [ { from = 27000; to = 27031; } ];
+    };
+
   } (if useBridge then {
     defaultGateway.interface = "br0";
     bridges.br0.interfaces = [ "eno1" ];
@@ -31,5 +40,7 @@ in
     defaultGateway.interface = "eno1";
     interfaces.eno1.ip4 = [ ip ];
   });
+
+
 
 }

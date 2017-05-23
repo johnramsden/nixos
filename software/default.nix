@@ -30,7 +30,7 @@
 
       virtualization = [
         virtmanager
-        OVMF qemu
+        OVMF qemu aqemu
       ];
 
       networking = [
@@ -38,6 +38,7 @@
         nfs-utils
         libnfsidmap
         sshfs-fuse
+        freerdp remmina
       ];
 
       utilities = [
