@@ -28,11 +28,17 @@
         pinentry_qt5
       ];
 
+      virtualization = [
+        virtmanager
+        OVMF qemu aqemu
+      ];
+
       networking = [
         tigervnc
         nfs-utils
         libnfsidmap
         sshfs-fuse
+        freerdp remmina
       ];
 
       utilities = [
@@ -41,7 +47,6 @@
         xvkbd
         pinentry
         keybase
-        virtmanager
       ];
 
       office = [
@@ -67,7 +72,6 @@
         thunderbird
         deluge
         firefox
-
       ];
 
       programming = [
@@ -122,6 +126,7 @@
 
     # Packages installed in system profile.
     in systemAdministration ++
+      virtualization ++
       networking ++
       utilities ++
       office ++

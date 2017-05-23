@@ -1,12 +1,5 @@
 { config, pkgs, ... }:
 
 {
-
-  imports = [ ./lxc ];
-
-  virtualisation = {
-    libvirtd.enable = true;
-    libvirtd.enableKVM = true;
-  };
-
+  imports = [ ./lxc ./iommu ];
 }
