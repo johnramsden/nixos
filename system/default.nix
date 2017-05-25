@@ -8,7 +8,7 @@
     ./virtualization
     ./networking
   ];
-  
+
   ## Hardware Related
   hardware = {
     # Sound
