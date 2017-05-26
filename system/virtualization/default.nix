@@ -23,7 +23,7 @@
     kvm.members = [ "john" ];
   };
 
-  boot.kernelModules = [ "kvm-intel" ]; # Add "tun" for qemu
+    boot.kernelModules = [ "kvm-intel" ]; # Add "tun" for qemu
 
     services.udev.extraRules = let
       zfsUser = if config.boot.zfs.enableUnstable then pkgs.zfsUnstable else pkgs.zfs;

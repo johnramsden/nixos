@@ -30,7 +30,7 @@
 
       virtualization = [
         virtmanager
-        OVMF qemu aqemu
+        OVMF qemu
       ];
 
       networking = [
@@ -47,6 +47,7 @@
         xvkbd
         pinentry
         keybase
+        wineStaging cabextract
       ];
 
       office = [

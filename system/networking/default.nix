@@ -21,11 +21,16 @@ in
     defaultGateway.address = "172.20.20.1";
 
     firewall = {
-      #enable = true;
       # Open ports for Steam - https://support.steampowered.com/kb_article.php?ref=8571-GLVN-8711
-      allowedTCPPorts = [ 27036 27037 ];
+      allowedTCPPorts = [
+        27036 27037 # Steam
+        139 445     # samba
+      ];
       #allowedTCPPortRanges = [ { from = ; to = ; } ];
-      allowedUDPPorts = [ 4380 27031 27036 ];
+      allowedUDPPorts = [
+        4380 27031 27036 # Steam
+        137 138          # samba
+      ];
       allowedUDPPortRanges = [ { from = 27000; to = 27031; } ];
     };
 

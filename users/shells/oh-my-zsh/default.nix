@@ -26,10 +26,15 @@
 
     ## --------------------- MISC ---------------------- ##
 
-    export GPG_TTY=$(tty)    
+    export GPG_TTY=$(tty)
     export XDG_CONFIG_HOME=$HOME/.config
     export ELECTRON_TRASH=kioclient5
     export EDITOR="nano"
     export XENVIRONMENT=$HOME/.Xdefaults
+
+    export PATH="$HOME/.local/bin:$PATH"
+
+    # Do not create wine menus
+    export WINEDLLOVERRIDES="winemenubuilder.exe=d"
     '';
 }
