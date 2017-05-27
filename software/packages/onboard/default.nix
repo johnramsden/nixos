@@ -16,6 +16,9 @@
 , bash
 , intltool
 , glib
+, gobjectIntrospection
+, gsettings_desktop_schemas
+, wrapGAppsHook
 }:
 
 python35Packages.buildPythonApplication rec {
@@ -49,7 +52,11 @@ python35Packages.buildPythonApplication rec {
     python35Packages.systemd
     python35Packages.distutils_extra
     python35Packages.pyatspi
+    python35Packages.pygobject3
     glib
+    gobjectIntrospection
+    gsettings_desktop_schemas
+    wrapGAppsHook
   ];
 
   preBuild = ''
@@ -61,6 +68,9 @@ python35Packages.buildPythonApplication rec {
   postInstall = ''
     cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
     ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
+
+    addToSearchPath GI_TYPELIB_PATH $out/lib/girepository-1.0
+    addToSearchPath XDG_DATA_DIRS $out/share
     '';
 
   meta = {
