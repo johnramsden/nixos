@@ -61,8 +61,32 @@ python35Packages.buildPythonApplication rec {
 
   preBuild = ''
     rm -r Onboard/pypredict/attic
+
     patchShebangs .
-    substituteInPlace  ./setup.py --replace /bin/bash ${bash}/bin/bash
+    patchShebangs ./Onboard/
+    patchShebangs ./scripts/
+    patchShebangs ./Onboard/test/
+    patchShebangs ./Onboard/pypredict/
+    patchShebangs ./Onboard/pypredict/lm/
+    patchShebangs ./Onboard/pypredict/test/
+    patchShebangs ./Onboard/pypredict/tools/
+
+    substituteInPlace  ./Onboard/LanguageSupport.py --replace "/usr/share/xml/iso-codes" ${isocodes}/share/xml/iso-codes
+
+    substituteInPlace  ./Onboard/LanguageSupport.py --replace /usr/bin/yelp ${pkgs.yelp}/bin/yelp
+    substituteInPlace  ./Onboard/Indicator.py --replace   /usr/bin/yelp ${pkgs.yelp}/bin/yelp
+    substituteInPlace  ./gnome/Onboard_Indicator@onboard.org/extension.js --replace /usr/bin/yelp ${pkgs.yelp}/bin/yelp
+    substituteInPlace  ./Onboard/SpellChecker.py --replace "/usr/share/hunspell" ${pkgs.hunspell}/bin/hunspell
+
+    substituteInPlace  ./data/org.onboard.Onboard.service  --replace "/usr/bin" "out/bin"
+    substituteInPlace  ./Onboard/utils.py --replace "/usr/share" "out/share"
+    substituteInPlace  ./onboard-defaults.conf.example --replace "/usr/share" "out/share"
+    substituteInPlace  ./Onboard/Config.py --replace "/usr/share/onboard" "$out/share/onboard"
+
+    substituteInPlace  ./Onboard/WordSuggestions.py --replace "/usr/bin" "out/bin"
+
+    substituteInPlace  ./setup.py --replace /bin/bash ${stdenv.shell}
+    substituteInPlace  ./Onboard/TextDomain.py --replace /bin/bash ${stdenv.shell}
   '';
 
   postInstall = ''

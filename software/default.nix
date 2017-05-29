@@ -31,6 +31,8 @@
       virtualization = [
         virtmanager
         OVMF qemu
+        spice_gtk
+        virt-viewer
       ];
 
       networking = [
@@ -47,7 +49,7 @@
         xvkbd
         pinentry
         keybase
-        wineStaging cabextract
+        # wineStaging cabextract # For wine
       ];
 
       office = [
@@ -121,7 +123,7 @@
         ];
 
         customPackages = [
-          #(pkgs.callPackage ./packages/onboard {})
+          (pkgs.callPackage ./packages/onboard {})
           (pkgs.callPackage ./packages/nylas-mail {})
         ];
 
