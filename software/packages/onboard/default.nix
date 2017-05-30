@@ -77,7 +77,8 @@
         --replace "/usr/bin/yelp" "${pkgs.yelp}/bin/yelp"
 
       substituteInPlace  ./Onboard/SpellChecker.py \
-        --replace "/usr/share/hunspell" ${pkgs.hunspell}/bin/hunspell
+        --replace "/usr/share/hunspell" ${pkgs.hunspell}/bin/hunspell \
+        --replace "/usr/lib" "$out/lib"
 
       substituteInPlace  ./data/org.onboard.Onboard.service  \
         --replace "/usr/bin" "out/bin"
