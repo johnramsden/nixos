@@ -22,6 +22,12 @@
     initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci"
                                       "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
 
+    # If using intel, blacklist nvidia
+    blacklistedKernelModules =
+      if builtins.elem "intel" config.services.xserver.videoDrivers
+      then [ "nouveau" "nvidia" "nvidiafb" ]
+      else [];
+
     # Do not forcefully importpool or root.
     zfs.forceImportAll = false;
     zfs.forceImportRoot = false;
