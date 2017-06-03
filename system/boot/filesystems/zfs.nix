@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-    mountSkel = true;
+    mountSkel = false;
     skelMountPoint = "/mnt/skel";
 
     baseDataset = "vault/sys";
@@ -93,23 +93,28 @@ let
       };
     };
 
-in
-{
-  fileSystems =
-    (map (ds: {mountPoint = ds; device = "${baseDataset}/atom${ds}"; fsType = "zfs";})
-                                                                  datasets.atom.regularDatasets) ++
-    (map (ds: { mountPoint = ds; device = "${baseDataset}/atom/${bootEnvironment}${ds}"; fsType = "zfs";})
-                                                                  datasets.atom.bootEnvironmentDatasets) ++
-    (map (ds: {mountPoint = "/home/john${ds}"; device = "${storageDataset}${ds}"; fsType = "zfs";})
-                                                                  datasets.atom.storageDatasets) ++
-    (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
-                                                                  datasets.atom.differentMountPointDatasets) ++
-    # Non current system datasets
-    #if mountSkel then
+    skelDatasets =
       (map (ds: {mountPoint = "${skelMountPoint}${ds}"; device = "${baseDataset}/skel${ds}"; fsType = "zfs";})
                                                                     datasets.skel.regularDatasets) ++
       (map (ds: { mountPoint = "${skelMountPoint}${ds}"; device = "${baseDataset}/skel/ROOT/default${ds}"; fsType = "zfs";})
                                                                     datasets.skel.bootEnvironmentDatasets) ++
       (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
                                                                     datasets.skel.differentMountPointDatasets);
+    systemDatasets =
+      (map (ds: {mountPoint = ds; device = "${baseDataset}/atom${ds}"; fsType = "zfs";})
+                                                                    datasets.atom.regularDatasets) ++
+      (map (ds: { mountPoint = ds; device = "${baseDataset}/atom/${bootEnvironment}${ds}"; fsType = "zfs";})
+                                                                    datasets.atom.bootEnvironmentDatasets) ++
+      (map (ds: {mountPoint = "/home/john${ds}"; device = "${storageDataset}${ds}"; fsType = "zfs";})
+                                                                    datasets.atom.storageDatasets) ++
+      (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
+                                                                    datasets.atom.differentMountPointDatasets);
+in
+{
+
+  fileSystems =
+    if mountSkel then
+      systemDatasets ++ skelDatasets
+    else
+      systemDatasets;
 }
