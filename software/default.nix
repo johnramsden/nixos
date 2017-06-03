@@ -26,6 +26,14 @@
         nix-repl
         gnupg gnupg1
         pinentry_qt5
+        ark
+        (pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
+          version = "160804";
+          src = pkgs.fetchurl {
+           url = "ftp://ftp.supermicro.com/utility/IPMIView/Linux/IPMIView_2.12.0_build.${version}_bundleJRE_Linux_x64.tar.gz";
+           sha256 = "787a060413451a4a5993c31805f55a221087b7199bbaf20e9fe1254e2a76db42";
+         };
+        }))
       ];
 
       virtualization = [
@@ -55,6 +63,7 @@
       office = [
         gimp
         libreoffice
+        calibre
       ];
 
       multimedia = [
