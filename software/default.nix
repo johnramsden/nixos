@@ -43,6 +43,7 @@
       gnupg gnupg1
       pinentry_qt5
       ark
+      gptfdisk
       updatedIpmiview
     ];
 

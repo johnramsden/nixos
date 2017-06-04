@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-    mountSkel = false;
-    skelMountPoint = "/mnt/skel";
-
     baseDataset = "vault/sys";
     bootEnvironment = "ROOT/17.03";
     storageDataset = "vault/data";
@@ -56,50 +53,8 @@ let
             ds = "${baseDataset}/atom/home/john/local/share/Steam"; }
         ];
       };
-      skel = {
-        regularDatasets = [
-          "/home" "/home/john" "/home/john/VMs"
-          "/home/john/VMs/disks"
-          "/var/cache" "/var/lib/lxc" "/var/lib/lxc/nix"
-          "/var/lib/lxd" "/var/lib/machines"
-          "/var/log" "/var/log/journal"
-        ];
 
-        bootEnvironmentDatasets = [
-          "/opt" "/usr" "/usr/lib" "/usr/local"
-          "/usr/share" "/var" "/var/abs" "/var/lib"
-          "/var/lib/pacman" "/var/lib/systemd/coredump"
-        ];
-
-        differentMountPointDatasets = [
-          { mount = "${skelMountPoint}";
-            ds = "${baseDataset}/skel/ROOT/default"; }
-
-          { mount = "${skelMountPoint}/home/john/.cache";
-            ds = "${baseDataset}/skel/home/john/cache"; }
-
-          { mount = "${skelMountPoint}/home/john/.config";
-            ds = "${baseDataset}/skel/home/john/config"; }
-
-          { mount = "${skelMountPoint}/home/john/.local";
-            ds = "${baseDataset}/skel/home/john/local"; }
-
-          { mount = "${skelMountPoint}/home/john/.local/share/Steam";
-            ds = "${baseDataset}/skel/home/john/local/share/Steam"; }
-
-          { mount = "${skelMountPoint}/home/john/.local/share/libvirt";
-            ds = "${baseDataset}/skel/home/john/local/share/libvirt"; }
-        ];
-      };
     };
-
-    skelDatasets =
-      (map (ds: {mountPoint = "${skelMountPoint}${ds}"; device = "${baseDataset}/skel${ds}"; fsType = "zfs";})
-                                                                    datasets.skel.regularDatasets) ++
-      (map (ds: { mountPoint = "${skelMountPoint}${ds}"; device = "${baseDataset}/skel/ROOT/default${ds}"; fsType = "zfs";})
-                                                                    datasets.skel.bootEnvironmentDatasets) ++
-      (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
-                                                                    datasets.skel.differentMountPointDatasets);
     systemDatasets =
       (map (ds: {mountPoint = ds; device = "${baseDataset}/atom${ds}"; fsType = "zfs";})
                                                                     datasets.atom.regularDatasets) ++
@@ -111,10 +66,5 @@ let
                                                                     datasets.atom.differentMountPointDatasets);
 in
 {
-
-  fileSystems =
-    if mountSkel then
-      systemDatasets ++ skelDatasets
-    else
-      systemDatasets;
+  fileSystems = systemDatasets;
 }
