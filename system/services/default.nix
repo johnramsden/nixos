@@ -13,7 +13,6 @@
     rsyslogd = {
       enable = true;
       extraConfig = ''
-
       '';
     };
 
@@ -23,9 +22,8 @@
     };
 
     zabbixAgent = {
-      enable = true;
+      enable = false;
       server = "zabbix.ramsden.network";
-
     };
 
     journald.extraConfig = ''
