@@ -25,11 +25,13 @@ in
       allowedTCPPorts = [
         27036 27037 # Steam
         139 445     # samba
+        10050       # zabbix
       ];
       #allowedTCPPortRanges = [ { from = ; to = ; } ];
       allowedUDPPorts = [
         4380 27031 27036 # Steam
         137 138          # samba
+        10050            # zabbix
       ];
       allowedUDPPortRanges = [ { from = 27000; to = 27031; } ];
     };
