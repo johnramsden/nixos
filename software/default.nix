@@ -46,6 +46,7 @@
       libnfsidmap
       sshfs-fuse
       freerdp remmina
+      ipmitool
     ];
 
     utilities = [
@@ -77,7 +78,7 @@
     internet = [
       blink
       hexchat
-      google-chrome
+      #google-chrome
       thunderbird
       deluge
       firefox
@@ -130,12 +131,13 @@
 
       # Packages I wrote
       customPackages = [
-        (pkgs.callPackage ./packages/onboard {})
+        #(pkgs.callPackage ./packages/onboard {})
         (pkgs.callPackage ./packages/nylas-mail {})
       ];
 
       # Existing packages I customized
       customizedPackages = [
+
         (pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
           version = "160804";
           src = pkgs.fetchurl {
@@ -143,13 +145,24 @@
            sha256 = "787a060413451a4a5993c31805f55a221087b7199bbaf20e9fe1254e2a76db42";
         };
         installPhase = ''
-          mkdir -p $out/bin
+          mkdir -p $out/bin- $out/share/java
           cp -R . $out/
+          cp $out/iKVM.jar $out/share/java/
 
           makeWrapper $out/jre/bin/java $out/bin/IPMIView \
+            --prefix PATH : "$out/jre/bin" \
             --add-flags "-jar $out/IPMIView20.jar"
         '';
         }))
+
+        (pkgs.google-chrome.overrideAttrs (oldAttrs: rec {
+
+          src = pkgs.fetchurl {
+            url = "http://www.slimjetbrowser.com/chrome/lnx/chrome64_57.0.2987.133.deb";
+            sha256 = "4a62a77b3c7960f9313d41a40f645b7178d6a8b91f9f1141d7664026692ef63d";
+          };
+        }))
+
       ];
 
     # Packages installed in system profile.
