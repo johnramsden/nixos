@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 
-# Edit the cnfig file in /etc/zfs/zed.d
+# Edit the config file in /etc/zfs/zed.d
 let
   zfsUser = if config.boot.zfs.enableUnstable then pkgs.zfsUnstable else pkgs.zfs;
   newcfg = pkgs.runCommand "newcfg" {} ''
@@ -14,4 +14,5 @@ let
   '';
 in {
   environment.etc."zfs/zed.d".source = lib.mkForce newcfg;
+  environment.pathsToLink = [ "/include/libzfs" ];
 }

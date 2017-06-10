@@ -95,6 +95,10 @@
       ruby
       bundler
       nodejs
+      gnumake
+      gdb
+      clang lldb
+      zfs
     ];
 
     kdeSoftware = with kdeApplications; [

@@ -21,10 +21,10 @@
       notifications.mail.enable = true;
     };
 
-    zabbixAgent = {
+    /*zabbixAgent = {
       enable = false;
       server = "zabbix.ramsden.network";
-    };
+    };*/
 
     journald.extraConfig = ''
       ForwardToSyslog=yes
