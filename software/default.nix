@@ -78,7 +78,7 @@
     internet = [
       blink
       hexchat
-      #google-chrome
+      google-chrome
       thunderbird
       deluge
       firefox
@@ -180,6 +180,6 @@
       internet ++
       programming ++ dev ++
       kdeSoftware ++
-      customPackages ++ customizedPackages;
+      customPackages; # ++ customizedPackages;
 
 }

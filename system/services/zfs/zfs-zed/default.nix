@@ -14,5 +14,5 @@ let
   '';
 in {
   environment.etc."zfs/zed.d".source = lib.mkForce newcfg;
-  environment.pathsToLink = [ "/include/libzfs" ];
+  environment.pathsToLink = [ "/include/libzfs" "/include/libspl" ];
 }
