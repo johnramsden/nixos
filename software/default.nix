@@ -78,7 +78,7 @@
     internet = [
       blink
       hexchat
-      #google-chrome
+      google-chrome
       thunderbird
       deluge
       firefox
@@ -95,6 +95,10 @@
       ruby
       bundler
       nodejs
+      gnumake
+      gdb
+      clang lldb
+      zfs
     ];
 
     kdeSoftware = with kdeApplications; [
@@ -155,13 +159,13 @@
         '';
         }))
 
-        (pkgs.google-chrome.overrideAttrs (oldAttrs: rec {
+        /*(pkgs.google-chrome.overrideAttrs (oldAttrs: rec {
 
           src = pkgs.fetchurl {
             url = "http://www.slimjetbrowser.com/chrome/lnx/chrome64_57.0.2987.133.deb";
             sha256 = "4a62a77b3c7960f9313d41a40f645b7178d6a8b91f9f1141d7664026692ef63d";
           };
-        }))
+        }))*/
 
       ];
 
@@ -176,6 +180,6 @@
       internet ++
       programming ++ dev ++
       kdeSoftware ++
-      customPackages ++ customizedPackages;
+      customPackages; # ++ customizedPackages;
 
 }

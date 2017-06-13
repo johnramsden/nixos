@@ -13,7 +13,6 @@
     rsyslogd = {
       enable = true;
       extraConfig = ''
-
       '';
     };
 
@@ -22,11 +21,10 @@
       notifications.mail.enable = true;
     };
 
-    zabbixAgent = {
-      enable = true;
+    /*zabbixAgent = {
+      enable = false;
       server = "zabbix.ramsden.network";
-
-    };
+    };*/
 
     journald.extraConfig = ''
       ForwardToSyslog=yes
