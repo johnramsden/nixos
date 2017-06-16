@@ -137,6 +137,7 @@
       customPackages = [
         #(pkgs.callPackage ./packages/onboard {})
         (pkgs.callPackage ./packages/nylas-mail {})
+        (pkgs.callPackage ./packages/postman {})
       ];
 
       # Existing packages I customized
