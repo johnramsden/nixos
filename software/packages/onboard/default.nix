@@ -62,6 +62,11 @@
     preBuild = ''
       rm -r Onboard/pypredict/attic
 
+      substituteInPlace  ./scripts/sokSettings.py  \
+        --replace "#!/usr/bin/python3" ""
+
+      chmod -x ./scripts/sokSettings.py
+
       for dir in ". ./Onboard/ ./scripts/ ./Onboard/test/ ./Onboard/pypredict/
             ./Onboard/pypredict/lm/ ./Onboard/pypredict/test/ ./Onboard/pypredict/tools/";
       do patchShebangs $dir; done
