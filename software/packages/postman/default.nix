@@ -18,8 +18,20 @@
 , gdk_pixbuf
 , atomEnv
 , alsaLib
+,makeDesktopItem
 }:
 
+let
+  desktopItem = makeDesktopItem {
+    name = "Postman";
+    exec = "postman %U";
+    icon = "postman";
+    comment = "Build, test, and document your APIs faster";
+    desktopName = "Postman";
+    genericName = "Postman";
+    categories = "Application;Development;;Utility;";
+  };
+in
 stdenv.mkDerivation rec {
   name = "${pkgname}-${version}";
   pkgname = "postman";
@@ -67,7 +79,7 @@ stdenv.mkDerivation rec {
   buildInputs = [ makeWrapper ];
 
   unpackPhase = ''
-    mkdir -p $out
+    mkdir -p $out/bin
     tar xvf $src > /dev/null
     mv Postman/* $out
 
@@ -80,6 +92,13 @@ stdenv.mkDerivation rec {
       --set LD_LIBRARY_PATH "${lib.makeLibraryPath [
           stdenv.cc.cc.lib alsaLib.out atomEnv.libPath
         ]}"
+
+    ln -s $out/Postman $out/bin/postman
+
+    mkdir -p $out/share/applications $out/share/icons/hicolor/128x128/apps
+    cp ${desktopItem}/share/applications/* $out/share/applications
+    cp $out/resources/app/assets/icon.png $out/share/icons/hicolor/128x128/apps/postman.png
+
   '';
 
   meta = with stdenv.lib; {
