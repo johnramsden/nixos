@@ -47,6 +47,7 @@
       sshfs-fuse
       freerdp remmina
       ipmitool
+      httpie
     ];
 
     utilities = [
@@ -135,7 +136,7 @@
 
       # Packages I wrote
       customPackages = [
-        #(pkgs.callPackage ./packages/onboard {})
+        (pkgs.callPackage ./packages/onboard {})
         (pkgs.callPackage ./packages/nylas-mail {})
         (pkgs.callPackage ./packages/postman {})
       ];
@@ -143,7 +144,7 @@
       # Existing packages I customized
       customizedPackages = [
 
-        (pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
+        /*(pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
           version = "160804";
           src = pkgs.fetchurl {
            url = "ftp://ftp.supermicro.com/utility/IPMIView/Linux/IPMIView_2.12.0_build.${version}_bundleJRE_Linux_x64.tar.gz";
@@ -158,14 +159,6 @@
             --prefix PATH : "$out/jre/bin" \
             --add-flags "-jar $out/IPMIView20.jar"
         '';
-        }))
-
-        /*(pkgs.google-chrome.overrideAttrs (oldAttrs: rec {
-
-          src = pkgs.fetchurl {
-            url = "http://www.slimjetbrowser.com/chrome/lnx/chrome64_57.0.2987.133.deb";
-            sha256 = "4a62a77b3c7960f9313d41a40f645b7178d6a8b91f9f1141d7664026692ef63d";
-          };
         }))*/
 
       ];
