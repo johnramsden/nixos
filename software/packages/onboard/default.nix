@@ -62,8 +62,10 @@
     preBuild = ''
       rm -r Onboard/pypredict/attic
 
-      substituteInPlace  ./scripts/sokSettings.py  \
-        --replace "#!/usr/bin/python3" ""
+      substituteInPlace  ./scripts/sokSettings.py \
+        --replace "#!/usr/bin/python3" "" \
+        --replace "PYTHON_EXECUTABLE," "\"$out/bin/onboard-settings\"" \
+        --replace '"-cfrom Onboard.settings import Settings\ns = Settings(False)"' ""
 
       chmod -x ./scripts/sokSettings.py
 
@@ -86,17 +88,17 @@
         --replace "/usr/lib" "$out/lib"
 
       substituteInPlace  ./data/org.onboard.Onboard.service  \
-        --replace "/usr/bin" "out/bin"
+        --replace "/usr/bin" "$out/bin"
 
       substituteInPlace  ./Onboard/utils.py \
-        --replace "/usr/share" "out/share"
+        --replace "/usr/share" "$out/share"
       substituteInPlace  ./onboard-defaults.conf.example \
-        --replace "/usr/share" "out/share"
+        --replace "/usr/share" "$out/share"
       substituteInPlace  ./Onboard/Config.py \
         --replace "/usr/share/onboard" "$out/share/onboard"
 
       substituteInPlace  ./Onboard/WordSuggestions.py \
-        --replace "/usr/bin" "out/bin"
+        --replace "/usr/bin" "$out/bin"
 
       substituteInPlace  ./setup.py \
         --replace "/bin/bash" ${stdenv.shell}

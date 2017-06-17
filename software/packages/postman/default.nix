@@ -29,7 +29,7 @@ let
     comment = "Build, test, and document your APIs faster";
     desktopName = "Postman";
     genericName = "Postman";
-    categories = "Application;Development;;Utility;";
+    categories = "Application;Development;Utility;";
   };
 in
 stdenv.mkDerivation rec {
@@ -103,8 +103,7 @@ stdenv.mkDerivation rec {
 
   meta = with stdenv.lib; {
     description = "Build, test, and document your APIs faster";
-    license = licenses.mit;
-    maintainers = with maintainers; [ johnramsden ];
+    license = licenses.unfree;
     homepage = https://www.getpostman.com;
     platforms = [ "x86_64-linux" ];
   };
