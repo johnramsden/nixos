@@ -6,6 +6,8 @@
       enable = true;
       defaultConfig = ''
         lxc.include = ${pkgs.lxcfs}/share/lxc/config/common.conf.d/00-lxcfs.conf
+        lxc.network.type = veth
+        lxc.network.link = br0
       '';
       systemConfig = ''
         lxc.rootfs.backend = zfs
@@ -27,5 +29,8 @@
     { device = "vault/sys/atom/var/lib/lxc/pop";
       fsType = "zfs";
     };
-
+  fileSystems."/var/lib/lxc/centos-builder/rootfs" =
+    { device = "vault/sys/atom/var/lib/lxc/centos-builder";
+      fsType = "zfs";
+    };
 }

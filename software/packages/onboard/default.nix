@@ -59,6 +59,10 @@
       wrapGAppsHook
     ];
 
+    buildInputs = [
+      glib gobjectIntrospection gsettings_desktop_schemas
+    ];
+
     preBuild = ''
       rm -r Onboard/pypredict/attic
 
@@ -107,8 +111,10 @@
     '';
 
     postInstall = ''
+      mkdir -p $out/share/glib-2.0/schemas/ $out/lib/girepository-1.0
       cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
-      ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
+
+      ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas
 
       addToSearchPath GI_TYPELIB_PATH $out/lib/girepository-1.0
       addToSearchPath XDG_DATA_DIRS $out/share
