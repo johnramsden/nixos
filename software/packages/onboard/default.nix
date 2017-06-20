@@ -3,6 +3,7 @@
   , fetchurl
   , gtk3
   , gnome3
+  , at_spi2_core
   , libcanberra_gtk3
   , libudev
   , hunspell
@@ -55,7 +56,7 @@
     ];
 
     buildInputs = [
-      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook
+      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook at_spi2_core
     ];
 
     preBuild = ''
@@ -126,7 +127,7 @@
         For example, to turn on key labels:
         dconf write /org/onboard/keyboard/show-secondary-labels true
       '';
-      maintainers = with maintainers; [ johnramsden ];
+      maintainers = with stdenv.lib.maintainers; [ johnramsden ];
       license = stdenv.lib.licenses.gpl3;
     };
   }
