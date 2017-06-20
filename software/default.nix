@@ -33,6 +33,8 @@
       parted
     ];
 
+    system = [ gnome3.dconf gnome3.dconf-editor ];
+
     virtualization = [
       virtmanager
       OVMF qemu
@@ -165,6 +167,7 @@
 
     # Packages installed in system profile.
     in systemAdministration ++
+      system ++
       virtualization ++
       networking ++
       utilities ++

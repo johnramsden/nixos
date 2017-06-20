@@ -34,7 +34,6 @@
 
     propagatedBuildInputs = [
       gtk3
-      gnome3.dconf
       libcanberra_gtk3
       libudev
       bash
@@ -52,15 +51,11 @@
       python35Packages.systemd
       python35Packages.distutils_extra
       python35Packages.pyatspi
-      python35Packages.pygobject3
       glib
-      gobjectIntrospection
-      gsettings_desktop_schemas
-      wrapGAppsHook
     ];
 
     buildInputs = [
-      glib gobjectIntrospection gsettings_desktop_schemas
+      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook
     ];
 
     preBuild = ''
@@ -112,9 +107,10 @@
 
     postInstall = ''
       mkdir -p $out/share/glib-2.0/schemas/ $out/lib/girepository-1.0
+
       cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
 
-      ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas
+      ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
 
       addToSearchPath GI_TYPELIB_PATH $out/lib/girepository-1.0
       addToSearchPath XDG_DATA_DIRS $out/share
@@ -123,6 +119,14 @@
     meta = {
       homepage = https://launchpad.net/onboard;
       description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
+      longDescription = ''
+        An onscreen keyboard useful for tablet PC users and for mobility impaired users.
+        In order to save settings, add pkgs.gnome3.dconf to environment.systemPackages.
+        Additional settings can be changed with dconf.
+        For example, to turn on key labels:
+        dconf write /org/onboard/keyboard/show-secondary-labels true
+      '';
+      maintainers = with maintainers; [ johnramsden ];
       license = stdenv.lib.licenses.gpl3;
     };
   }
