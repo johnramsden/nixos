@@ -3,7 +3,7 @@
   , fetchurl
   , gtk3
   , gnome3
-  , at_spi2_core
+  , atspiSupport ? true, at_spi2_core ? null
   , libcanberra_gtk3
   , libudev
   , hunspell
@@ -56,8 +56,8 @@
     ];
 
     buildInputs = [
-      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook at_spi2_core
-    ];
+      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook
+    ] ++ stdenv.lib.optional atspiSupport at_spi2_core;
 
     preBuild = ''
       rm -r Onboard/pypredict/attic
@@ -122,10 +122,12 @@
       description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
       longDescription = ''
         An onscreen keyboard useful for tablet PC users and for mobility impaired users.
-        In order to save settings, add pkgs.gnome3.dconf to environment.systemPackages.
+        In order to save settings, add "pkgs.gnome3.dconf" to "environment.systemPackages".
         Additional settings can be changed with dconf.
         For example, to turn on key labels:
         dconf write /org/onboard/keyboard/show-secondary-labels true
+        For word prediction enable atspiSupport
+        To get rid of org.a11y.Bus warning enable "services.gnome3.at-spi2-core.enable = true"
       '';
       maintainers = with stdenv.lib.maintainers; [ johnramsden ];
       license = stdenv.lib.licenses.gpl3;
