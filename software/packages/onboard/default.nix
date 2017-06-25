@@ -3,6 +3,7 @@
   , fetchurl
   , gtk3
   , gnome3
+  , atspiSupport ? true, at_spi2_core ? null
   , libcanberra_gtk3
   , libudev
   , hunspell
@@ -34,7 +35,6 @@
 
     propagatedBuildInputs = [
       gtk3
-      gnome3.dconf
       libcanberra_gtk3
       libudev
       bash
@@ -52,18 +52,20 @@
       python35Packages.systemd
       python35Packages.distutils_extra
       python35Packages.pyatspi
-      python35Packages.pygobject3
       glib
-      gobjectIntrospection
-      gsettings_desktop_schemas
-      wrapGAppsHook
     ];
+
+    buildInputs = [
+      glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook
+    ] ++ stdenv.lib.optional atspiSupport at_spi2_core;
 
     preBuild = ''
       rm -r Onboard/pypredict/attic
 
-      substituteInPlace  ./scripts/sokSettings.py  \
-        --replace "#!/usr/bin/python3" ""
+      substituteInPlace  ./scripts/sokSettings.py \
+        --replace "#!/usr/bin/python3" "" \
+        --replace "PYTHON_EXECUTABLE," "\"$out/bin/onboard-settings\"" \
+        --replace '"-cfrom Onboard.settings import Settings\ns = Settings(False)"' ""
 
       chmod -x ./scripts/sokSettings.py
 
@@ -86,17 +88,17 @@
         --replace "/usr/lib" "$out/lib"
 
       substituteInPlace  ./data/org.onboard.Onboard.service  \
-        --replace "/usr/bin" "out/bin"
+        --replace "/usr/bin" "$out/bin"
 
       substituteInPlace  ./Onboard/utils.py \
-        --replace "/usr/share" "out/share"
+        --replace "/usr/share" "$out/share"
       substituteInPlace  ./onboard-defaults.conf.example \
-        --replace "/usr/share" "out/share"
+        --replace "/usr/share" "$out/share"
       substituteInPlace  ./Onboard/Config.py \
         --replace "/usr/share/onboard" "$out/share/onboard"
 
       substituteInPlace  ./Onboard/WordSuggestions.py \
-        --replace "/usr/bin" "out/bin"
+        --replace "/usr/bin" "$out/bin"
 
       substituteInPlace  ./setup.py \
         --replace "/bin/bash" ${stdenv.shell}
@@ -105,7 +107,10 @@
     '';
 
     postInstall = ''
+      mkdir -p $out/share/glib-2.0/schemas/ $out/lib/girepository-1.0
+
       cp onboard-default-settings.gschema.override.example $out/share/glib-2.0/schemas/10_onboard-default-settings.gschema.override
+
       ${glib.dev}/bin/glib-compile-schemas $out/share/glib-2.0/schemas/
 
       addToSearchPath GI_TYPELIB_PATH $out/lib/girepository-1.0
@@ -115,6 +120,16 @@
     meta = {
       homepage = https://launchpad.net/onboard;
       description = "An onscreen keyboard useful for tablet PC users and for mobility impaired users.";
+      longDescription = ''
+        An onscreen keyboard useful for tablet PC users and for mobility impaired users.
+        In order to save settings, add "pkgs.gnome3.dconf" to "environment.systemPackages".
+        Additional settings can be changed with dconf.
+        For example, to turn on key labels:
+        dconf write /org/onboard/keyboard/show-secondary-labels true
+        For word prediction enable atspiSupport
+        To get rid of org.a11y.Bus warning enable "services.gnome3.at-spi2-core.enable = true"
+      '';
+      maintainers = with stdenv.lib.maintainers; [ johnramsden ];
       license = stdenv.lib.licenses.gpl3;
     };
   }
