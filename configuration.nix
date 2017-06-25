@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+# Repair tree: nix-store --verify --check-contents --repair
+# Check dependencies: nix-store -q --tree $(nix-instantiate '<nixos/nixos>' -A system)
+
 {
   imports =
     [
