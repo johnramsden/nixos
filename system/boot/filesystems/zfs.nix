@@ -51,6 +51,9 @@ let
 
           { mount = "/home/john/.local/share/Steam";
             ds = "${baseDataset}/atom/home/john/local/share/Steam"; }
+
+          { mount = "/home/john/VMs";
+            ds = "${baseDataset}/atom/home/john/vms"; }
         ];
       };
 

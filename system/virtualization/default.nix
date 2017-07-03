@@ -10,6 +10,7 @@
   # General virtualization
 
   virtualisation = {
+    #virtualbox.host.enable = true;  # See: https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/virtualization/virtualbox/default.nix
     libvirtd.enable = true; # KVM enabled by default.
     libvirtd.qemuVerbatimConfig = ''
       nvram = [ "${pkgs.OVMF}/FV/OVMF_CODE.fd:${pkgs.OVMF}/FV/OVMF_VARS.fd" ]

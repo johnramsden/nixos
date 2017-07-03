@@ -163,6 +163,7 @@
       # Existing packages I customized, try runtimeOnly = true
       customizedPackages = [
         (pkgs.steam.override { newStdcpp = true; })
+        #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly
       ];
 
     # Packages installed in system profile.

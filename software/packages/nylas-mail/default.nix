@@ -27,6 +27,47 @@
 , xorg
 }:
 
+let
+  libraryInputs = with xorg; [
+      alsaLib
+      atk
+      cairo
+      coreutils
+      cups
+      dbus
+      desktop_file_utils
+      expat
+      fontconfig
+      freetype
+      gcc-unwrapped
+      gdk_pixbuf
+      glib
+      gnome2.GConf
+      gnome2.gtk
+      libgnome_keyring
+      libnotify
+      nodejs
+      nspr
+      nss
+      pango
+      python2
+      udev
+      wget
+      libX11
+      libXScrnSaver
+      libXcomposite
+      libXcursor
+      libXdamage
+      libXext
+      libXfixes
+      libXi
+      libXrandr
+      libXrender
+      libXtst
+      libxkbfile
+    ];
+in
+
 stdenv.mkDerivation rec {
   name = "${pkgname}-${version}";
   pkgname = "nylas-mail";
@@ -42,8 +83,7 @@ stdenv.mkDerivation rec {
     else
       throw "NylasMail is not supported on ${stdenv.system}";
 
-  # Build dependencies
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with xorg; [
     alsaLib
     atk
     cairo
@@ -68,26 +108,25 @@ stdenv.mkDerivation rec {
     python2
     udev
     wget
-    xorg.libX11
-    xorg.libXScrnSaver
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXtst
-    xorg.libxkbfile
+    libX11
+    libXScrnSaver
+    libXcomposite
+    libXcursor
+    libXdamage
+    libXext
+    libXfixes
+    libXi
+    libXrandr
+    libXrender
+    libXtst
+    libxkbfile
   ];
 
-  # Runtime dependencies
-  buildInputs = [ makeWrapper gnome2.gnome_keyring ];
+  buildInputs = [ gnome2.gnome_keyring ];
 
-  phases = [ "unpackPhase" ];
+  nativeBuildInputs = [ makeWrapper ];
 
-  unpackPhase = ''
+  buildCommand = ''
     mkdir -p $out
 
     ${dpkg}/bin/dpkg-deb -x $src unpacked
@@ -99,17 +138,17 @@ stdenv.mkDerivation rec {
 
     # Patch librariess
     noderp=$(patchelf --print-rpath $out/share/nylas-mail/libnode.so)
-    patchelf --set-rpath $noderp:$out/lib:${stdenv.cc.cc.lib}/lib:${xorg.libxkbfile.out}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+    patchelf --set-rpath $noderp:$out/lib:${stdenv.cc.cc.lib}/lib:${xorg.libxkbfile.out}/lib:${lib.makeLibraryPath libraryInputs } \
       $out/share/nylas-mail/libnode.so
 
     ffrp=$(patchelf --print-rpath $out/share/nylas-mail/libffmpeg.so)
-    patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+    patchelf --set-rpath $ffrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath libraryInputs } \
       $out/share/nylas-mail/libffmpeg.so
 
     # Patch binaries
     binrp=$(patchelf --print-rpath $out/share/nylas-mail/nylas)
     patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-      --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath propagatedBuildInputs } \
+      --set-rpath $binrp:$out/lib:${stdenv.cc.cc.lib}/lib:${lib.makeLibraryPath libraryInputs } \
       $out/share/nylas-mail/nylas
 
     wrapProgram $out/share/nylas-mail/nylas --set LD_LIBRARY_PATH "${xorg.libxkbfile}/lib:${pkgs.gnome3.libgnome_keyring}/lib";

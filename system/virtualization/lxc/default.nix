@@ -33,4 +33,9 @@
     { device = "vault/sys/atom/var/lib/lxc/centos-builder";
       fsType = "zfs";
     };
+
+    fileSystems."/var/lib/lxc/bez/rootfs" =
+      { device = "vault/sys/atom/var/lib/lxc/bez";
+        fsType = "zfs";
+      };
 }
