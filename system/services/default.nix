@@ -5,12 +5,13 @@
 
   ## Services ##
   services = {
+    #nylas-mail.enable = true;
     openssh.enable = true;
     rpcbind.enable = true;
     znapzend.enable = true;
     samba.enable = true;
     gnome3.at-spi2-core.enable = true;
-    
+
     rsyslogd = {
       enable = true;
       extraConfig = ''

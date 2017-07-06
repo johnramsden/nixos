@@ -85,6 +85,9 @@
       thunderbird
       deluge
       firefox
+    ] ++ [
+      # Cherrypicked
+      nylas-mail-bin
     ];
 
     programming = [
@@ -139,8 +142,8 @@
       # Packages I wrote
       customPackages = [
         (pkgs.callPackage ./packages/onboard {})
-        (pkgs.callPackage ./packages/nylas-mail {})
-        (pkgs.callPackage ./packages/postman {})
+        #(pkgs.callPackage ./packages/nylas-mail {})
+        #(pkgs.callPackage ./packages/postman {})
       ];
 
       /*(pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
@@ -160,7 +163,7 @@
       '';
       }))*/
 
-      # Existing packages I customized, try runtimeOnly = true
+      # Existing packages I customized.
       customizedPackages = [
         (pkgs.steam.override { newStdcpp = true; })
         #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly
