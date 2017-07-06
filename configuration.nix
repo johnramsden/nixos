@@ -11,14 +11,22 @@
       ./users
     ];
 
-  system.autoUpgrade.enable = true;
+#  system.autoUpgrade.enable = true;
 
-  nix.gc = { # Run Garbage Collecter nightly
-    automatic = true;
-    dates = "20:15";
+  nix = {
+    nixPath = [
+        "/etc/nixos"
+        "nixpkgs=/etc/nixos/nixpkgs"
+        "nixos-config=/etc/nixos/configuration.nix"
+    ];
+
+    gc = { # Run Garbage Collecter nightly
+      automatic = true;
+      dates = "20:15";
+    };
+    # Build inside chroot
+    useSandbox = true;
   };
-  # Build inside chroot
-  nix.useSandbox = true;
 
   # Select internationalisation properties.
   i18n = {
