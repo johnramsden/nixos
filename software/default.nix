@@ -3,6 +3,9 @@
 {
   ## Configuration ##
 
+  # Search packages:
+  # grep -r gdb ./pkgs/top-level/all-packages.nix
+
   nixpkgs.config.allowUnfree = true;
   nix.maxJobs = lib.mkDefault 8;
 
@@ -87,7 +90,7 @@
       firefox
     ] ++ [
       # Cherrypicked
-      nylas-mail-bin
+      #nylas-mail-bin # Enabled with service
     ];
 
     programming = [
@@ -142,7 +145,6 @@
       # Packages I wrote
       customPackages = [
         (pkgs.callPackage ./packages/onboard {})
-        #(pkgs.callPackage ./packages/nylas-mail {})
         #(pkgs.callPackage ./packages/postman {})
       ];
 

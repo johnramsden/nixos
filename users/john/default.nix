@@ -29,7 +29,8 @@
 
   # Services Drectly Connected to john
   services = {
-    gnome3.gnome-keyring.enable = true;
+    # Enabled by Nylas-Mail
+    #gnome3.gnome-keyring.enable = true;
 
     syncthing = {
       openDefaultPorts = true;

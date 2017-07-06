@@ -1,11 +1,15 @@
 { config, pkgs, ... }:
 
 {
-    imports = [ ./security.nix ./graphics.nix ./zfs ];
+    imports = [
+      ./security.nix
+      ./graphics.nix
+      ./zfs
+    ];
 
   ## Services ##
   services = {
-    #nylas-mail.enable = true;
+    nylas-mail.enable = true;
     openssh.enable = true;
     rpcbind.enable = true;
     znapzend.enable = true;

@@ -4,11 +4,12 @@
 # Check dependencies: nix-store -q --tree $(nix-instantiate '<nixos/nixos>' -A system)
 
 {
-  imports =
-    [
+  imports = [
       ./software
       ./system
       ./users
+    ] ++ [ # Cherrypicked imports
+      ./nixpkgs/nixos/modules/programs/nylas-mail.nix
     ];
 
 #  system.autoUpgrade.enable = true;
