@@ -7,24 +7,38 @@ let
     datasets = {
       atom = {
         regularDatasets = [
-          "/var/log" "/var/cache" "/home" "/var/lib/lxc"
-          "/var/log/journal" "/home/john"
+          "/home"
+          "/home/john"
+          "/var/log"
+          "/var/cache"
+          "/var/log/journal"
+          "/var/lib/lxc"
+          "/var/lib/docker"
+          "/var/lib/docker-registry"
         ];
 
         bootEnvironmentDatasets = [
-          "/nix" "/nix/store" "/var" "/var/lib" "/nix/var"
-          "/var/lib/nixos" "/nix/var/nix" "/var/lib/systemd" "/nix/var/log"
-          "/var/lib/systemd/coredump" "/var/lib/containers"
+          "/nix"
+          "/nix/var"
+          "/nix/var/log"
+          "/nix/var/nix"
+          "/nix/store"
+          "/var"
+          "/var/lib"
+          "/var/lib/nixos"
+          "/var/lib/containers"
+          "/var/lib/systemd"
+          "/var/lib/systemd/coredump"
         ];
 
         storageDatasets = [ # Mounted under $HOME
-          "/Computer"
-          "/Workspace"
-          "/University"
-          "/Pictures"
-          "/Reference"
           "/Books"
           "/Personal"
+          "/Pictures"
+          "/Computer"
+          "/Reference"
+          "/Workspace"
+          "/University"
         ];
 
         differentMountPointDatasets = [
@@ -56,17 +70,28 @@ let
             ds = "${baseDataset}/atom/home/john/vms"; }
         ];
       };
-
     };
+
     systemDatasets =
-      (map (ds: {mountPoint = ds; device = "${baseDataset}/atom${ds}"; fsType = "zfs";})
-                                                                    datasets.atom.regularDatasets) ++
-      (map (ds: { mountPoint = ds; device = "${baseDataset}/atom/${bootEnvironment}${ds}"; fsType = "zfs";})
-                                                                    datasets.atom.bootEnvironmentDatasets) ++
-      (map (ds: {mountPoint = "/home/john${ds}"; device = "${storageDataset}${ds}"; fsType = "zfs";})
-                                                                    datasets.atom.storageDatasets) ++
-      (map ({ mount, ds }: {mountPoint = mount; device = "${ds}"; fsType = "zfs";})
-                                                                    datasets.atom.differentMountPointDatasets);
+      (map (ds:
+        { mountPoint = ds;
+          device = "${baseDataset}/atom${ds}";
+          fsType = "zfs"; }) datasets.atom.regularDatasets)
+        ++
+      (map (ds:
+        { mountPoint = ds;
+          device = "${baseDataset}/atom/${bootEnvironment}${ds}";
+          fsType = "zfs"; }) datasets.atom.bootEnvironmentDatasets)
+        ++
+      (map (ds:
+        { mountPoint = "/home/john${ds}";
+          device = "${storageDataset}${ds}";
+          fsType = "zfs"; }) datasets.atom.storageDatasets)
+        ++
+      (map ({ mount, ds }:
+        { mountPoint = mount;
+          device = "${ds}";
+          fsType = "zfs";}) datasets.atom.differentMountPointDatasets);
 in
 {
   fileSystems = systemDatasets;

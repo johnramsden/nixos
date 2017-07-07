@@ -14,7 +14,7 @@
   users.users.john = {
         name = "john";
         group = "john";
-        extraGroups = [ "wheel" "networkmanager" "audio" "users" "vboxusers" ];
+        extraGroups = [ "wheel" "networkmanager" "audio" "users" "vboxusers" "docker" ];
         uid = 1000;
         home = "/home/john";
         shell = pkgs.zsh;

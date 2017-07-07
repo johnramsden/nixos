@@ -4,6 +4,7 @@
   imports =
   [
     ./lxc
+    ./docker
     #./iommu
   ];
 
