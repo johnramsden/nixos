@@ -6,6 +6,7 @@
       enable = true;
       defaultConfig = ''
         lxc.include = ${pkgs.lxcfs}/share/lxc/config/common.conf.d/00-lxcfs.conf
+        lxc.aa_allow_incomplete = 1
         lxc.network.type = veth
         lxc.network.link = br0
       '';
@@ -33,7 +34,10 @@
     { device = "vault/sys/atom/var/lib/lxc/centos-builder";
       fsType = "zfs";
     };
-
+    fileSystems."/var/lib/lxc/zed/rootfs" =
+      { device = "vault/sys/atom/var/lib/lxc/zed";
+        fsType = "zfs";
+      };
     fileSystems."/var/lib/lxc/bez/rootfs" =
       { device = "vault/sys/atom/var/lib/lxc/bez";
         fsType = "zfs";
