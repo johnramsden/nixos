@@ -61,7 +61,7 @@
       xvkbd
       pinentry
       keybase
-      #vcsh mr
+      mr
     ] ++ [
       # Cherrypicked
       onboard
@@ -150,25 +150,19 @@
         #(pkgs.callPackage ./packages/postman {})
       ];
 
-      /*(pkgs.ipmiview.overrideAttrs (oldAttrs: rec {
-        version = "160804";
-        src = pkgs.fetchurl {
-         url = "ftp://ftp.supermicro.com/utility/IPMIView/Linux/IPMIView_2.12.0_build.${version}_bundleJRE_Linux_x64.tar.gz";
-         sha256 = "787a060413451a4a5993c31805f55a221087b7199bbaf20e9fe1254e2a76db42";
-      };
-      installPhase = ''
-        mkdir -p $out/bin- $out/share/java
-        cp -R . $out/
-        cp $out/iKVM.jar $out/share/java/
-
-        makeWrapper $out/jre/bin/java $out/bin/IPMIView \
-          --prefix PATH : "$out/jre/bin" \
-          --add-flags "-jar $out/IPMIView20.jar"
-      '';
-      }))*/
-
       # Existing packages I customized.
       customizedPackages = [
+
+      (pkgs.vcsh.overrideAttrs (oldAttrs: rec {
+        configurePhase = ''
+          substituteInPlace ./Makefile --replace "all=test manpages" "all=manpages";
+        '';
+        #dontBuild = true;
+        installPhase = ''
+          make install PREFIX=$out
+        '';
+      }))
+
         (pkgs.steam.override { newStdcpp = true; })
         #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly
       ];
