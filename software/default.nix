@@ -61,7 +61,7 @@
       xvkbd
       pinentry
       keybase
-      vcsh mr
+      #vcsh mr
     ] ++ [
       # Cherrypicked
       onboard

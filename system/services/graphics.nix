@@ -2,14 +2,16 @@
 
 {
 
-services.xserver = {
+services.xserver = rec {
   enable = true;
   layout = "us";
 
+  videoDrivers = [ "nvidia" ]; # Tried in order:
   # Tearing fix when using nvidia
-  #screenSection = ''Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"'';
-
-  videoDrivers = [ "intel" ]; # Tried in order:
+  screenSection =
+    if builtins.elem "nvidia" config.services.xserver.videoDrivers
+    then  ''Option  "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"''
+    else '''';
 
   desktopManager.plasma5.enable = true;
 
