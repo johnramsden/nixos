@@ -61,7 +61,10 @@
       xvkbd
       pinentry
       keybase
-      # wineStaging cabextract # For wine
+      vcsh mr
+    ] ++ [
+      # Cherrypicked
+      onboard
     ];
 
     office = [
@@ -144,7 +147,6 @@
 
       # Packages I wrote
       customPackages = [
-        (pkgs.callPackage ./packages/onboard {})
         #(pkgs.callPackage ./packages/postman {})
       ];
 
