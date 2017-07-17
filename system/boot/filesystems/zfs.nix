@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
     baseDataset = "vault/sys";
-    bootEnvironment = "ROOT/17.03";
+    bootEnvironment = "ROOT/17.03-v1";
     storageDataset = "vault/data";
 
     datasets = {
