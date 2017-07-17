@@ -8,8 +8,8 @@
   programs.zsh.interactiveShellInit = lib.mkForce ''
     COMPUTER="atom"
     ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-    HISTFILE=$HOME/Computer/System/atom/oh-my-zsh/zsh_history
-    ZSH_CUSTOM=$HOME/Computer/System/atom/oh-my-zsh/custom
+    HISTFILE=$HOME/.config/oh-my-zsh/zsh_history
+    ZSH_CUSTOM=$HOME/.config/oh-my-zsh/custom
     ZSH_THEME="af-magic"
     DISABLE_AUTO_UPDATE=true
 
