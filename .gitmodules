@@ -1,6 +1,6 @@
 [submodule "nixpkgs"]
 	path = nixpkgs
-	url = https://github.com/nixos/nixpkgs.git
+	url = git@github.com:johnramsden/nixpkgs.git
 [submodule "secrets"]
 	path = secrets
-	url = https://github.com/johnramsden/nixos-secrets.git
+	url = git@github.com:johnramsden/nixos-secrets.git
