@@ -17,9 +17,10 @@
 , glib
 , gobjectIntrospection
 , gsettings_desktop_schemas
+, glibcLocales
 , wrapGAppsHook
-, makeWrapper
 , yelp
+, psmisc
 }:
 
 python3.pkgs.buildPythonApplication rec {
@@ -31,29 +32,42 @@ python3.pkgs.buildPythonApplication rec {
     sha256 = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865";
   };
 
-  #doCheck = false;
+  doCheck = false;
+
+  LC_ALL = "en_US.UTF-8";
+
+  nativeBuildInputs = [
+    pkgconfig
+    intltool
+    wrapGAppsHook
+  ];
+
+  propagatedBuildInputs = with python3.pkgs; [
+    distutils_extra
+    pycairo
+    dbus-python
+    systemd
+    distutils_extra
+    pyatspi
+    nose
+  ];
 
   buildInputs = [
-    glib gobjectIntrospection gsettings_desktop_schemas gnome3.dconf wrapGAppsHook makeWrapper
-    python3.pkgs.distutils_extra
     gtk3
+    glibcLocales
+    gobjectIntrospection
+    gsettings_desktop_schemas
+    gnome3.dconf
+    glib
     libcanberra_gtk3
     libudev
     bash
     hunspell
     isocodes
-    pkgconfig
     xorg.libXtst
     xorg.libxkbfile
     libxkbcommon
-    intltool
-    python3.pkgs.pycairo
-    python3.pkgs.dbus-python
-    python3.pkgs.pygobject3
-    python3.pkgs.systemd
-    python3.pkgs.distutils_extra
-    python3.pkgs.pyatspi
-    glib
+    psmisc
   ] ++ stdenv.lib.optional atspiSupport at_spi2_core;
 
   preBuild = ''
@@ -111,27 +125,6 @@ python3.pkgs.buildPythonApplication rec {
 
     addToSearchPath GI_TYPELIB_PATH $out/lib/girepository-1.0
     addToSearchPath XDG_DATA_DIRS $out/share
-
-    wrapProgram $out/bin/onboard \
-        --prefix "LD_LIBRARY_PATH" : "${stdenv.lib.makeLibraryPath [
-                                                        gtk3
-                                                        libcanberra_gtk3
-                                                        libudev
-                                                        bash
-                                                        hunspell
-                                                        isocodes
-                                                        pkgconfig
-                                                        xorg.libXtst
-                                                        xorg.libxkbfile
-                                                        libxkbcommon
-                                                        intltool
-                                                        python3.pkgs.pycairo
-                                                        python3.pkgs.dbus-python
-                                                        python3.pkgs.pygobject3
-                                                        python3.pkgs.systemd
-                                                        python3.pkgs.distutils_extra
-                                                        python3.pkgs.pyatspi
-                                                        glib ]}"
   '';
 
   meta = {

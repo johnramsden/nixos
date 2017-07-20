@@ -143,29 +143,29 @@
       okular
       print-manager
       spectacle
-      ];
+    ];
 
-      # Packages I wrote
-      customPackages = [
-        #(pkgs.callPackage ./packages/postman {})
-      ];
+    # Packages I wrote
+    customPackages = [
+      #(pkgs.callPackage ./packages/onboard {})
+    ];
 
-      # Existing packages I customized.
-      customizedPackages = [
+    # Existing packages I customized.
+    customizedPackages = [
 
-      (pkgs.vcsh.overrideAttrs (oldAttrs: rec {
-        configurePhase = ''
-          substituteInPlace ./Makefile --replace "all=test manpages" "all=manpages";
-        '';
-        #dontBuild = true;
-        installPhase = ''
-          make install PREFIX=$out
-        '';
-      }))
+    (pkgs.vcsh.overrideAttrs (oldAttrs: rec {
+      configurePhase = ''
+        substituteInPlace ./Makefile --replace "all=test manpages" "all=manpages";
+      '';
+      #dontBuild = true;
+      installPhase = ''
+        make install PREFIX=$out
+      '';
+    }))
 
-        (pkgs.steam.override { newStdcpp = true; })
-        #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly
-      ];
+      (pkgs.steam.override { newStdcpp = true; })
+      #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly
+    ];
 
     # Packages installed in system profile.
     in systemAdministration ++
