@@ -26,20 +26,8 @@
   security.apparmor.enable = true;
 
   # Containers to mount at boot:
-  fileSystems."/var/lib/lxc/pop/rootfs" =
-    { device = "vault/sys/atom/var/lib/lxc/pop";
-      fsType = "zfs";
-    };
   fileSystems."/var/lib/lxc/centos-builder/rootfs" =
     { device = "vault/sys/atom/var/lib/lxc/centos-builder";
       fsType = "zfs";
     };
-    fileSystems."/var/lib/lxc/archzed/rootfs" =
-      { device = "vault/sys/atom/var/lib/lxc/archzed";
-        fsType = "zfs";
-      };
-    fileSystems."/var/lib/lxc/bez/rootfs" =
-      { device = "vault/sys/atom/var/lib/lxc/bez";
-        fsType = "zfs";
-      };
 }
