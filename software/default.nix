@@ -61,6 +61,7 @@
       xvkbd
       pinentry
       keybase
+      go-ethereum
       mr
     ] ++ [
       # Cherrypicked
