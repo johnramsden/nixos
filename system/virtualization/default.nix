@@ -30,6 +30,7 @@
     services.udev.extraRules = let
       zfsUser = if config.boot.zfs.enableUnstable then pkgs.zfsUnstable else pkgs.zfs;
     in ''
-    KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${zfsUser}/lib/udev/zvol_id /dev/%k" RESULT=="vault/zvols/libvirt/kit" OWNER="john" GROUP="disk" MODE="0750"
+      KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${zfsUser}/lib/udev/zvol_id /dev/%k" RESULT=="vault/zvols/libvirt/kit" OWNER="john" GROUP="disk" MODE="0750"
+      KERNEL=="zd*" SUBSYSTEM=="block" ACTION=="add|change" PROGRAM="${zfsUser}/lib/udev/zvol_id /dev/%k" RESULT=="vault/zvols/libvirt/zed" OWNER="john" GROUP="disk" MODE="0750"
     '';
 }
