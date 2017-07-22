@@ -3,8 +3,8 @@
 {
   imports =
   [
-    ./lxc
-    ./docker
+    #./lxc
+    #./docker
     #./iommu
   ];
 
