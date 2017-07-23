@@ -148,7 +148,7 @@
 
     # Packages I wrote
     customPackages = [
-      #(pkgs.callPackage ./packages/onboard {})
+      (pkgs.callPackage ./packages/ethminer {})
     ];
 
     # Existing packages I customized.

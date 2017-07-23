@@ -1,6 +1,6 @@
-[submodule "nixpkgs"]
-	path = nixpkgs
-	url = git@github.com:johnramsden/nixpkgs.git
 [submodule "secrets"]
 	path = secrets
 	url = git@github.com:johnramsden/nixos-secrets.git
+[submodule "nixpkgs"]
+	path = nixpkgs
+	url = git@github.com:johnramsden/nixpkgs.git
