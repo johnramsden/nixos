@@ -148,7 +148,7 @@
 
     # Packages I wrote
     customPackages = [
-      (pkgs.callPackage ./packages/ethminer {})
+      #(pkgs.callPackage ./packages/claymore {})
     ];
 
     # Existing packages I customized.
