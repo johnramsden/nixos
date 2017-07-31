@@ -68,6 +68,7 @@ let
 
           { mount = "/home/john/VMs";
             ds = "${baseDataset}/atom/home/john/vms"; }
+
         ];
       };
     };
@@ -83,11 +84,11 @@ let
           device = "${baseDataset}/atom/${bootEnvironment}${ds}";
           fsType = "zfs"; }) datasets.atom.bootEnvironmentDatasets)
         ++
-      (map (ds:
-        { mountPoint = "/home/john${ds}";
-          device = "${storageDataset}${ds}";
-          fsType = "zfs"; }) datasets.atom.storageDatasets)
-        ++
+     (map (ds:
+       { mountPoint = "/home/john${ds}";
+         device = "${storageDataset}${ds}";
+         fsType = "zfs"; }) datasets.atom.storageDatasets)
+       ++
       (map ({ mount, ds }:
         { mountPoint = mount;
           device = "${ds}";
