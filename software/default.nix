@@ -62,10 +62,10 @@
       pinentry
       keybase
       go-ethereum
-      mr
+      mr vcsh
     ] ++ [
       # Cherrypicked
-      onboard
+#      onboard
     ];
 
     office = [
@@ -148,21 +148,21 @@
 
     # Packages I wrote
     customPackages = [
-      #(pkgs.callPackage ./packages/claymore {})
+      (pkgs.callPackage ./packages/onboard {})
     ];
 
     # Existing packages I customized.
     customizedPackages = [
 
-    (pkgs.vcsh.overrideAttrs (oldAttrs: rec {
-      configurePhase = ''
-        substituteInPlace ./Makefile --replace "all=test manpages" "all=manpages";
-      '';
-      #dontBuild = true;
-      installPhase = ''
-        make install PREFIX=$out
-      '';
-    }))
+#    (pkgs.vcsh.overrideAttrs (oldAttrs: rec {
+#      configurePhase = ''
+#        substituteInPlace ./Makefile --replace "all=test manpages" "all=manpages";
+#      '';
+#      #dontBuild = true;
+#      installPhase = ''
+#        make install PREFIX=$out
+#      '';
+#    }))
 
       (pkgs.steam.override { newStdcpp = true; })
       #(pkgs.virtualbox.override { enableExtensionPack = true; }) # Never worked properly

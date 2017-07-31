@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
     baseDataset = "vault/sys";
-    bootEnvironment = "ROOT/17.03-v1";
+    bootEnvironment = "ROOT/17.03-v2";
     storageDataset = "vault/data";
 
     datasets = {
@@ -13,8 +13,8 @@ let
           "/var/cache"
           "/var/log/journal"
           "/var/lib/lxc"
-          "/var/lib/docker"
-          "/var/lib/docker-registry"
+#          "/var/lib/docker"
+#          "/var/lib/docker-registry"
         ];
 
         bootEnvironmentDatasets = [
@@ -66,8 +66,8 @@ let
           { mount = "/home/john/.local/share/Steam";
             ds = "${baseDataset}/atom/home/john/local/share/Steam"; }
 
-          { mount = "/home/john/VMs";
-            ds = "${baseDataset}/atom/home/john/vms"; }
+#          { mount = "/home/john/VMs";
+#            ds = "${baseDataset}/atom/home/john/vms"; }
 
         ];
       };

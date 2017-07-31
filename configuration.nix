@@ -9,8 +9,8 @@
       ./system
       ./users
     ] ++ [ # Cherrypicked imports
-      ./nixpkgs/nixos/modules/programs/nylas-mail.nix
-      ./nixpkgs/nixos/modules/services/backup/znapzend.nix
+#      ./nixpkgs/nixos/modules/programs/nylas-mail.nix
+#      ./nixpkgs/nixos/modules/services/backup/znapzend.nix
     ];
 
 #  system.autoUpgrade.enable = true;

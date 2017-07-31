@@ -32,18 +32,14 @@ in
         { mountPoint = "${baseMountPoint}/${dev}";
           device = "${serverMountPoint}/${dev}";
           fsType = "nfs";
-          options = [ "noauto" "x-systemd.automount"
-                      "x-systemd.device-timeout=175"
-                      "timeo=15" "x-systemd.idle-timeout=1min" "user"
-                    ];
+          options = [ "noauto" "timeo=15" "user" ]; # ++ [
+#"x-systemd.automount" "x-systemd.device-timeout=175""x-systemd.idle-timeout=1min" ];
         }) devices.mediaDevices) ++
       (map ({ mount, dev }:
         { mountPoint = "${baseMountPoint}/${mount}";
           device = "${serverMountPoint}/${dev}";
           fsType = "nfs";
-          options = [ "noauto" "x-systemd.automount"
-                      "x-systemd.device-timeout=175"
-                      "timeo=15" "x-systemd.idle-timeout=1min" "user"
-                    ];
+          options = [ "noauto" "timeo=15" "user" ]; # ++ [
+#"x-systemd.automount" "x-systemd.device-timeout=175""x-systemd.idle-timeout=1min" ];
         })  devices.differentMountPointDevices);
 }
